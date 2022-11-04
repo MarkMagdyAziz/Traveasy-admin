@@ -23,7 +23,7 @@ export class AuthAPIServiceService {
   }
   private handleErr(err: HttpErrorResponse) {
     if (err.status)
-      alert(`An Error occured ${err.error} ${err.message} ${err.status}`);
+      alert(`An Error occured ${JSON.stringify(err.error.message)} `);
     return throwError(() => new Error(`An Error occured  ${err.status}`));
   }
   loggin(credentials: ICredentials): Observable<IUser> {
@@ -31,6 +31,15 @@ export class AuthAPIServiceService {
       .post<IUser>(
         `${environment.BasicURL}auth/signin`,
         JSON.stringify(credentials),
+        this.httpOption
+      )
+      .pipe(retry(2), catchError(this.handleErr));
+  }
+  register(userData: any): Observable<IUser> {
+    return this.http
+      .post<IUser>(
+        `${environment.BasicURL}auth/signup`,
+        JSON.stringify(userData),
         this.httpOption
       )
       .pipe(retry(2), catchError(this.handleErr));
