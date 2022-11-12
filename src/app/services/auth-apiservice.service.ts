@@ -23,7 +23,9 @@ export class AuthAPIServiceService {
   }
   private handleErr(err: HttpErrorResponse) {
     if (err.status)
-      alert(`An Error occured ${JSON.stringify(err.error.message)} `);
+      alert(
+        `An Error occured ${JSON.stringify(err.error.message)} ${err.status}`
+      );
     return throwError(() => new Error(`An Error occured  ${err.status}`));
   }
   loggin(credentials: ICredentials): Observable<IUser> {
