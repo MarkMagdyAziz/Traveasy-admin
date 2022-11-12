@@ -1,0 +1,26 @@
+<section class="slideBar" [ngClass]="collapsed ? 'slideBar-collapsed':''">
+   <div class="logo-container">
+      <a (click)="toggleCollapse()">
+         <img class="logo-icon" src="../../../assets/logoIconWhite.png" alt="" srcset="">
+      </a>
+      <div class="logo-text">
+         <span *ngIf="collapsed">TravEasy</span>
+      </div>
+      <button class="btn-close" *ngIf="collapsed" (click)="closeSlideBar()">
+      </button>
+   </div>
+   <ul class="slideBar-nav">
+      <li class="slideBar-nav-item" *ngFor="let data of sliderData">
+         <a class="slideBar-nab-link" [routerLink]="[data.routerLink]">
+            <i class="slideBar-link-icon "[class]="data.icon"></i>
+            <span class="slideBar-link-text" *ngIf="collapsed">{{data.label}}</span>
+         </a>
+
+      </li>
+
+
+   </ul>
+
+
+
+</section>
