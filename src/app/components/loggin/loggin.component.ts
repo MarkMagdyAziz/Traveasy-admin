@@ -1,6 +1,6 @@
 import { AuthAPIServiceService } from './../../services/auth-apiservice.service';
-import { IUser } from './../../interfaces/iuser';
-import { ICredentials } from './../../interfaces/icredentials';
+import { IUser } from '../../interfaces/iuser';
+import { ICredentials } from '../../interfaces/icredentials';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 

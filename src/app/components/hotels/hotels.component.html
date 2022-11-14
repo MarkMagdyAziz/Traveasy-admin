@@ -1,1 +1,53 @@
-<p>hotels works!</p>
+<section class="tourGuid">
+
+    <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <div class="icon" data-aos="fade-up" data-aos-duration="350">
+            <i class="fa-solid fa-earth-asia"></i>
+        </div>
+        <article data-aos="fade-up" data-aos-duration="400">
+            <span>46</span>
+            <p> Hotels </p>
+        </article>
+    </div>
+
+    <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+            <td>Id</td>
+            <td>Hotel Name</td>
+            <td>City</td>
+            <td>Evaluation</td>
+            <td>ImgURL</td>
+            <td>Period</td>
+            <td>Single</td>
+            <td>Double</td>
+            <td>Description</td>
+            <td>Price</td>
+            <td>lon</td>
+            <td>lat</td>
+            <td>Edit</td>
+            <td>Delete</td>
+
+        </thead>
+        <tbody>
+ 
+            <tr data-aos="fade-up" *ngFor="let i of hotelsList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
+                <td>{{i?._id}}</td>
+                <td>{{i?.HotelName}}</td>
+                <td>{{i?.City?.City_Name}}</td>
+                <td>{{i?.Evaluation}}</td>
+                <td>{{i?.ImgURL}}</td>
+                <td>{{i?.Period}}</td>
+                <!-- <td>{{i?.Single}}</td>
+                <td>{{i?.Double}}</td> -->
+                <td>{{i?.Description}}</td>
+                <td>{{i?.Price}}</td>
+                <td>{{i?.lon}}</td>
+                <td>{{i?.lat}}</td>
+                <td><button class="orangeBtn" (click)="handleEditBtn(i?._id)">Edit</button></td>
+                <td><button class="redBtn"  (click)="handleDelete(i?._id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</section>

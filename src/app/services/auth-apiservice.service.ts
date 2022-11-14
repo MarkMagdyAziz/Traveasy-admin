@@ -6,8 +6,8 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { ICredentials } from './../interfaces/icredentials';
-import { IUser } from './../interfaces/iuser';
+import { ICredentials } from '../interfaces/icredentials';
+import { IUser } from '../interfaces/iuser';
 @Injectable({
   providedIn: 'root',
 })

@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FlightsComponent } from './components/flights/flights.component';
+import { HolidayFormComponent } from './components/holiday-form/holiday-form.component';
 import { HolidayComponent } from './components/holiday/holiday.component';
+import { HotelFormComponent } from './components/hotel-form/hotel-form.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { LogginComponent } from './components/loggin/loggin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TourguidComponent } from './components/tourguid/tourguid.component';
+import { UpdHotelFormComponent } from './components/upd-hotel-form/upd-hotel-form.component';
 import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
@@ -19,6 +22,9 @@ const routes: Routes = [
   {path:"flight", component:FlightsComponent},
   {path:"holiday", component:HolidayComponent},
   {path:"tourguid", component:TourguidComponent},
+  {path:"form", component:HotelFormComponent},
+  {path:"hform", component:HolidayFormComponent},
+  {path:"updhotel/:id", component:UpdHotelFormComponent},
 
 ];
 
