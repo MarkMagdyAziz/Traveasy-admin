@@ -1,9 +1,9 @@
 import { environment } from './../../environments/environment';
-import { ICredentials } from './../interfaces/icredentials';
+import { ICredentials } from '../interfaces/icredentials';
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthAPIServiceService } from './auth-apiservice.service';
-import { IUser } from './../interfaces/iuser';
+import { IUser } from '../interfaces/iuser';
 import { of } from 'rxjs';
 import {
   HttpClientTestingModule,

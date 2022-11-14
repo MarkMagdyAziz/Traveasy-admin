@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthAPIServiceService } from 'src/app/services/auth-apiservice.service';
-import { ICredentials } from './../../interfaces/icredentials';
-import { IUser } from './../../interfaces/iuser';
+import { ICredentials } from '../../interfaces/icredentials';
+import { IUser } from '../../interfaces/iuser';
 
 @Component({
   selector: 'app-register',

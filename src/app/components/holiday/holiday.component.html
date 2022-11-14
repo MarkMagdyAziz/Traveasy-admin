@@ -1,1 +1,49 @@
-<p>holiday works!</p>
+<section class="tourGuid">
+
+    <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <div class="icon" data-aos="fade-up" data-aos-duration="350">
+            <i class="fa-solid fa-earth-asia"></i>
+        </div>
+        <article data-aos="fade-up" data-aos-duration="400">
+            <span>46</span>
+            <p> Holidays </p>
+        </article>
+    </div>
+
+    <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+            <td>Id</td>
+            <td>City</td>
+            <td>Evaluation</td>
+            <td>ImgURL</td>
+            <td>Period</td>
+            <td>Description</td>
+            <td>Guide</td>
+            <td>Price</td>
+
+            <td>Edit</td>
+            <td>Delete</td>
+
+        </thead>
+        <tbody>
+ 
+            <tr data-aos="fade-up" *ngFor="let i of holidaysList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
+                <td>{{i?._id}}</td>
+                <td>{{i?.City}}</td>
+                <td>{{i?.Evaluation}}</td>
+                <td>{{i?.ImgURL}}</td>
+                <td>{{i?.Period}}</td>
+
+                <td>{{i?.Description}}</td>
+                <td>{{i?.Guide}}</td>
+
+                <td>{{i?.Price}}</td>
+
+                <td><button class="orangeBtn">Edit</button></td>
+                <td><button class="redBtn"  (click)="handleDelete(i?._id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
