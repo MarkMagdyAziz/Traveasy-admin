@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IBHoliday } from '../interfaces/ibholiday';
 import { Iholiday } from '../interfaces/iholiday';
 
 
@@ -53,8 +54,8 @@ postHoliday(newHoliday:Iholiday) : Observable<Iholiday>{
 
 
     updateHoliday(id: string,newHoliday:any) : Observable<Iholiday>{
-      return this.HttpClient.put<Iholiday>(`${environment.BasicURL}holiday/`+id,
-       JSON.stringify(newHoliday))
+      return this.HttpClient.put<Iholiday>(`${environment.BasicURL}holiday/${id}`,
+       JSON.stringify(newHoliday),httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -63,11 +64,42 @@ postHoliday(newHoliday:Iholiday) : Observable<Iholiday>{
 
 
 deleteHoliday(id:any) {
-  return this.HttpClient.delete(`${environment.BasicURL}holiday/${id}`)
+  return this.HttpClient.delete(`${environment.BasicURL}holiday/${id}`,httpOptions)
   .pipe(
     retry(2),
     catchError(this.handleError)
     )
 }
 
+
+// ***********************BookedHolidays***********************************************************
+
+
+getBookedHolodays(): Observable<any>{
+  return this.HttpClient.get<IBHoliday[]>(`${environment.BasicURL}bookedHoliday`)
+  .pipe(
+    retry(2),
+    catchError(this.handleError)
+    )
+}
+
+
+
+  updateBookedHolodays(id: string,newHoliday:any) : Observable<IBHoliday>{
+    return this.HttpClient.put<IBHoliday>(`${environment.BasicURL}bookedHoliday/${id}`,
+     JSON.stringify(newHoliday),httpOptions)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      ) }
+
+
+
+deleteBookedHolodays(id:any) {
+return this.HttpClient.delete(`${environment.BasicURL}bookedHoliday/${id}`,httpOptions)
+.pipe(
+  retry(2),
+  catchError(this.handleError)
+  )
+}
 }

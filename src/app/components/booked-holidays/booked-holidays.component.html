@@ -1,0 +1,120 @@
+<section class="tourGuid">
+
+    <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <div class="icon" data-aos="fade-up" data-aos-duration="350">
+            <i class="fa-solid fa-earth-asia"></i>
+        </div>
+        <article data-aos="fade-up" data-aos-duration="400">
+            <span>{{bookedList.length}}</span>
+            <p> Booked Hotels </p>
+        </article>
+    </div>
+
+    <!-- <button  class="btn btn-primary" (click)="showForm()">Add New Hotel</button> -->
+    <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+            <td>Id</td>
+            <td>RoomCount</td>
+            <td>AdultCount</td>
+            <td>Child</td>
+            <td>Period</td>
+            <td>IsApprove</td>
+            <td>startDate</td>
+            <td>endDate</td>
+            <td>Holiday</td>
+            <td>Tourist</td>
+            <!-- <td>Guide</td> -->
+            <td>Edit</td>
+            <td>Delete</td>
+
+        </thead>
+        <tbody>
+ 
+            <tr data-aos="fade-up" *ngFor="let i of bookedList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
+                <td>{{i?._id}}</td>
+                <td>{{i?.RoomCount}}</td>
+                <td>{{i?.AdultCount}}</td>
+                <td>{{i?.Child}}</td>
+                <td>{{i?.Period}}</td>
+                <td>{{i?.IsApprove}}</td>
+                <td>{{i?.startDate| date:'MM/dd/yyyy '}}</td>
+                <td>{{i?.endDate| date:'MM/dd/yyyy '}}</td>
+                <td>{{i?.Holidays?._id }}</td>
+                <td>{{i?.Tourist?.username}}</td>
+                <!-- <td>{{i?.Guide}}</td> -->
+                <td><button class="orangeBtn" (click)="handleEditBtn(i?._id)">Edit</button></td>
+                <td><button class="redBtn"  (click)="handleDelete(i?._id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<hr>
+
+<form
+ [hidden]="!editMode" #form="ngForm" (ngSubmit)="handleSubmit(form.value)" >
+    <h1>Booked Holiday Details</h1>
+
+    <h1>update holiday</h1>
+    <div class="mb-3">
+      <label for="RoomCount" class="form-label">Room Count</label>
+      <input class="form-control" disabled  type="number" id="RoomCount"  name="roomCount"  ngModel >
+      <!-- <div class="alert alert-warning" *ngIf="form.value['hotelName'].touched  && form.value['hotelName'].invalid ">
+        <small *ngIf="form.value['hotelName']?.errors?.['required']"> name is required</small>
+        </div> <small *ngIf="form['hotelName']?.errors?.['minLength']"> name must be atleast 5 letters</small>
+    </div> -->
+    </div>
+    <div class="mb-3">
+      <label for="adultCount" class="form-label">adult Count</label>
+      <input class="form-control" disabled   type="number" id="adultCount" name="adultCount" ngModel >
+    </div>
+    <div class="mb-3 ">
+        <label for="Child"  class="form-label">Child Count</label>
+
+      <input class="form-control" disabled   type="number" id="Child" name="child" ngModel >
+    </div>
+
+    <!-- <div class="mb-3">
+        <label for="ImgURL" class="form-label">ImgURL</label>
+        <input class="form-control" disabled   type="text" id="ImgURL" name="img" ngModel >
+      </div> -->
+
+      <div class="mb-3 ">
+        <label for="Period"  class="form-label">Period</label>
+        <input class="form-control" disabled   type="number" id="Period" name="period" ngModel >
+      </div>
+     
+      <div class="mb-3 ">
+        <p>is Approve?</p>
+
+        <label class="me-3 fs-5" for="true"  >true</label>
+        <input    type="radio" id="true" name="isApprove" value="true" ngModel > <br>
+        <label class="me-3 fs-5" for="false"  >false</label>
+        <input    type="radio" id="false" name="isApprove" value="false" ngModel >
+      </div>
+      <div class="mb-3">
+        <label for="startDate" class="form-label">startDate</label>
+        <input class="form-control" disabled   type="date"  name="startDate" ngModel id="startDate">
+      </div>
+      <div class="mb-3">
+        <label for="endDate" class="form-label">endDate</label>
+        <input class="form-control" disabled   type="date"  name="endDate" ngModel id="endDate">
+      </div>
+      <div class="mb-3">
+        <label for="Holidays" class="form-label">Holidays</label>
+        <input class="form-control" disabled   type="text" id="Holidays" name="holidays" ngModel >
+      </div>
+      
+
+      <div class="mb-3">
+        <label for="tourist" class="form-label">tourist</label>
+        <input class="form-control" disabled   type="text" id="tourist" name="tourist" ngModel >
+      </div>
+      <!-- <div class="mb-3">
+        <label for="guide" class="form-label">guide</label>
+        <input class="form-control" disabled   type="text" id="guide" name="guide" ngModel >
+      </div> -->
+
+    <button type="submit" value="{(editMode ? 'Update' : 'Add')}" class="btn btn-primary">Submit</button>
+  </form>

@@ -32,6 +32,11 @@ export class SidebarComponent implements OnInit {
       label:"Hotels"
     },
     {
+      routerLink: "bookedHotel",
+      icon:"fa-solid fa-earth-americas",
+      label:"Booked Hotels"
+    },
+    {
       routerLink: "flight",
       icon:"fa-solid fa-plane",
       label:"Flights"
@@ -40,6 +45,11 @@ export class SidebarComponent implements OnInit {
       routerLink: "holiday",
       icon:"fa-solid fa-passport",
       label:"Holiday"
+    },
+    {
+      routerLink: "bookedHoliday",
+      icon:"fa-solid fa-earth-americas",
+      label:"Booked Holidays"
     },
     {
       routerLink: "tourguid",
