@@ -11,26 +11,48 @@ import { LogginComponent } from './components/loggin/loggin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TourguidComponent } from './components/tourguid/tourguid.component';
 import { UsersComponent } from './components/users/users.component';
+import { AuthGuardGuard } from './helpers/auth-guard.guard';
 
 const routes: Routes = [
-
-  {path:"register" , component:RegisterComponent},
-  {path:"login" , component:LogginComponent},
-  {path:"dashboard", component:DashboardComponent},
-  {path:"hotel", component:HotelsComponent},
-  {path:"users", component:UsersComponent},
-  {path:"flight", component:FlightsComponent},
-  {path:"holiday", component:HolidayComponent},
-  {path:"tourguid", component:TourguidComponent},
-  {path: "bookedHotel", component:BookedHotelsComponent },
-  {path: "bookedHoliday", component:BookedHolidaysComponent },
-  {path: "city", component:CityComponent }
-
-
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LogginComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  { path: 'hotel', component: HotelsComponent, canActivate: [AuthGuardGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuardGuard] },
+  {
+    path: 'flight',
+    component: FlightsComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: 'holiday',
+    component: HolidayComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: 'tourguid',
+    component: TourguidComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: 'bookedHotel',
+    component: BookedHotelsComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: 'bookedHoliday',
+    component: BookedHolidaysComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  { path: 'city', component: CityComponent, canActivate: [AuthGuardGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

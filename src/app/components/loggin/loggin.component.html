@@ -1,5 +1,5 @@
 <div class="container w-50 ">
-  <form [formGroup]="logginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="logginForm" name="logginForm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
     <div class="mb-3">
       <label for="username" class="form-label">Username</label>
       <input type="text" class="form-control" id="username" formControlName="username">
@@ -10,4 +10,7 @@
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!logginForm.valid">Submit</button>
   </form>
+  <div class="alert alert-success mt-2" *ngIf="isLoggedIn">
+    Logged in as {{ roles }}.
+  </div>
 </div>
