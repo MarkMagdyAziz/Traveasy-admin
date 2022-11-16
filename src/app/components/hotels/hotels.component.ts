@@ -3,6 +3,7 @@ import { Ihotel } from 'src/app/interfaces/ihotel';
 import { HotelsService } from 'src/app/services/hotels.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Icity } from 'src/app/interfaces/icity';
 
 
 @Component({
@@ -13,14 +14,14 @@ import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angula
 export class HotelsComponent implements OnInit {
 
   hotelsList: Ihotel[] = []
+  
   // @ViewChild('hotelForm') form!: NgForm
 
- form!: FormGroup
-
+ form: FormGroup ;
   editMode: boolean = false;
   postMode: boolean = false;
   currentHotelId: string = '';
-
+  cities :Icity[]=[];
 
   constructor(
     private hotelService: HotelsService,
@@ -42,18 +43,21 @@ export class HotelsComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(25),
+          // Validators.minLength(3),
+          // Validators.maxLength(25),
         ],
       ),
-      img:new FormControl('',[Validators.required]),
+      img:new FormControl(
+        '',[Validators.required]
+        ),
 
       evaluation:
-      ['', [
+      new FormControl ( ['', [
         Validators.required,
         Validators.min(0),
+        // ************************************************************************************************
         Validators.max(5)]
-      ],
+      ]),
       period:new FormControl('', [
         Validators.required,
         Validators.min(0),
@@ -76,7 +80,8 @@ export class HotelsComponent implements OnInit {
       ),
       price:new FormControl('', [
         Validators.required,
-        Validators.min(0),]
+        Validators.min(0)
+      ]
       ),
     });
   }
@@ -86,6 +91,11 @@ export class HotelsComponent implements OnInit {
       this.hotelsList = data;
     });
 
+    this.hotelService.getCities().subscribe((data: any) => {
+      this.cities = data;
+      console.log(this.cities);
+      
+    });
   }
   showForm() {
     this.postMode = true;
@@ -96,16 +106,22 @@ export class HotelsComponent implements OnInit {
       console.log("valid");
       
     if (this.editMode) {
+      console.log("11");
+
       this.hotelService.updateHotel(this.currentHotelId, hotel).subscribe();
       alert('hotel data updated ')
     } else {
+      console.log("22");
+
       this.hotelService.postHotel(hotel).subscribe((data: any) => {
         alert('new hotel added ')
-  
+       this.form.reset();
       })
-    }}else{
-      console.log('not valid' );
-      
+    }
+  }else{
+      console.log('not valid: ' )
+
+
     }
 
   }
@@ -114,7 +130,7 @@ export class HotelsComponent implements OnInit {
 
     this.currentHotelId = id;
     let currentHotel = this.hotelsList.find((hotel) => { return hotel._id === id })
-    this.form.setValue({
+    this.form.patchValue( {
       hotelName: currentHotel?.HotelName,
       city: currentHotel?.City,
       evaluation: currentHotel?.Evaluation,
@@ -124,16 +140,15 @@ export class HotelsComponent implements OnInit {
       lat: currentHotel?.lat,
       lon: currentHotel?.lon,
       price: currentHotel?.Price
-
+  
     })
-    console.log(this.form);
 
     this.editMode = true;
 
 
   }
 
-
+ 
 
 
   handleDelete(id: any) {

@@ -19,7 +19,8 @@ import { BodyComponent } from './components/body/body.component';
 import { BookedHotelsComponent } from './components/booked-hotels/booked-hotels.component';
 import { BookedHolidaysComponent } from './components/booked-holidays/booked-holidays.component';
 import { CityComponent } from './components/city/city.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [AppComponent, LogginComponent, RegisterComponent, DashboardComponent, SidebarComponent, UsersComponent, HotelsComponent, FlightsComponent, HolidayComponent, TourguidComponent, BodyComponent, BookedHotelsComponent, BookedHolidaysComponent, CityComponent],
   imports: [
@@ -29,7 +30,8 @@ import { CityComponent } from './components/city/city.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    
+    BrowserAnimationsModule,
+	ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

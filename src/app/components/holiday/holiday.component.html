@@ -6,7 +6,7 @@
             <i class="fa-solid fa-earth-asia"></i>
         </div>
         <article data-aos="fade-up" data-aos-duration="400">
-            <span>46</span>
+            <span>{{holidaysList.length}}</span>
             <p> Holidays </p>
         </article>
     </div>
@@ -21,7 +21,7 @@
             <td>ImgURL</td>
             <td>Period</td>
             <td>Description</td>
-            <td>Guide</td>
+            <!-- <td>Guide</td> -->
             <td>Price</td>
 
             <td>Edit</td>
@@ -38,7 +38,7 @@
                 <td>{{i?.Period}}</td>
 
                 <td>{{i?.Description}}</td>
-                <td>{{i?.Guide}}</td>
+                <!-- <td>{{i?.Guide}}</td> -->
 
                 <td>{{i?.Price}}</td>
 
@@ -51,41 +51,46 @@
 
 <hr>
 
-<form [hidden]="!editMode && !postMode" #holidayForm="ngForm" (ngSubmit)="handleSubmit(holidayForm.value)">
+<form [hidden]="!editMode && !postMode" [formGroup]='holidayForm' (ngSubmit)="handleSubmit(holidayForm.value)">
     <h1>post new holiday</h1>
    
-    <div class="mb-3">
-      <label for="City" class="form-label">City</label>
-      <input  type="text" class="form-control" id="City" name="city" ngModel >
-    </div>
     <div class="mb-3 ">
-        <label cclass="form-control" for="Evaluation">Evaluation</label>
+      <p>City</p>
 
-      <input  type="number" id="Evaluation" name="evaluation" ngModel >
+<div *ngFor="let i of cities">
+  <input class="me-1"   type="radio" id="{{i?._id}}" formControlName="city" [value]="i?._id" ngModel >
+
+      <label   for="{{i?._id }}" >{{i?.City_Name}}</label> <br>
+   </div>
+  </div>
+    <div class="mb-3 ">
+        <label class="form-control" for="Evaluation">Evaluation</label>
+
+      <input  type="number" id="Evaluation"  formControlName="evaluation" ngModel >
     </div>
     <div class="mb-3">
         <label for="ImgURL" class="form-label">ImgURL</label>
-        <input  type="text" class="form-control" id="ImgURL" name="img" ngModel >
+        <input  type="text" class="form-control" id="ImgURL"  formControlName="img" ngModel >
       </div>
       <div class="mb-3 ">
         <label cclass="form-control" for="Period">Period</label>
 
-        <input  type="number" id="Period" name="period" ngModel >
+        <input  type="number" id="Period"  formControlName="period" ngModel >
       </div>
 
       <div class="mb-3">
         <label for="Description" class="form-label">Description</label>
-        <input  type="text" class="form-control"  name="description" ngModel id="Description">
+        <input  type="text" class="form-control"   formControlName="description" ngModel id="Description">
       </div>
 
       <div class="mb-3 ">
         <label cclass="form-control" for="Price">Price</label>
-        <input  type="number" id="Price" name="price" ngModel >
+        <input  type="number" id="Price"  formControlName="price" ngModel >
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="Guide" class="form-label">Guide</label>
-        <input  type="text" class="form-control"  name="guide" ngModel id="Guide">
-      </div>
+        <input  type="text" class="form-control"   formControlName="guide" ngModel id="Guide">
+      </div> -->
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

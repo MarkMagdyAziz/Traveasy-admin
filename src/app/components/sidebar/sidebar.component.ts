@@ -56,6 +56,11 @@ export class SidebarComponent implements OnInit {
       icon:"fa-solid fa-earth-americas",
       label:"Tour Guid"
     },
+    {
+      routerLink: "city",
+      icon:"fa-solid fa-earth-americas",
+      label:"City"
+    },
   ];
 
 

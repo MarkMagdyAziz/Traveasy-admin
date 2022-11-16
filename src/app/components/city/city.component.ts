@@ -37,9 +37,8 @@ export class CityComponent implements OnInit {
   handleSubmit(city: any) {     
   
       this.hotelService.postCities(city).subscribe((data: any) => {
-        alert('new hotel added ')
-console.log(city);
-
+        alert('new city added ')
+        this.form.reset();
   })
 }
 
@@ -48,7 +47,7 @@ handleDelete(id: any) {
   const observer = {
     next: () => {
       alert('removed succesfully');
-      this.hotelService.getHotels().subscribe((data: any) => {
+      this.hotelService.getCities().subscribe((data: any) => {
         this.cityList = data;
       });
     },

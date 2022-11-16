@@ -134,4 +134,13 @@ deleteBookedHotels(id:any) {
     )
 }
 
+
+// calc total price
+getBookedHotelsTotalPrice(id:any): Observable<any>{
+  return this.HttpClient.get<Ihotel[]>(`${environment.BasicURL}bookedHotel/agg?id=${id}`)
+  .pipe(
+    retry(2),
+    catchError(this.handleError)
+    )
+}
 }

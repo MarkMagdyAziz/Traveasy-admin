@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Icity } from 'src/app/interfaces/icity';
 import { Iholiday } from 'src/app/interfaces/iholiday';
 import { HolidayService } from 'src/app/services/holiday.service';
+import { HotelsService } from 'src/app/services/hotels.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-holiday',
@@ -15,18 +18,71 @@ export class HolidayComponent implements OnInit {
   editMode: boolean = false;
   postMode: boolean = false;
   currentHolidayID: string = '';
+  cities :Icity[]=[];
 
 
-  @ViewChild('holidayForm') form!: NgForm
+  // @ViewChild('holidayForm') form!: NgForm
+  holidayForm: FormGroup ;
 
   constructor(
-    private holidayService : HolidayService
-  ) { }
+    private holidayService : HolidayService,
+    private notifyService : NotificationService,
+    private hotelService: HotelsService,
+    private fb : FormBuilder
+
+  ) { 
+
+    this.holidayForm = this.fb.group({
+   
+      city:new FormControl(
+        '',
+        [
+          Validators.required,
+        ],
+      ),
+      description:new FormControl(
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+        ],
+      ),
+      img:new FormControl(
+        '',[Validators.required]
+        ),
+
+      evaluation:
+      new FormControl ( ['', [
+        Validators.required,
+        Validators.min(0),
+        // ************************************************************************************************
+        Validators.max(5)]
+      ]),
+      period:new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+      ]
+      ),
+      price:new FormControl('', [
+        Validators.required,
+        Validators.min(0)
+      ]
+      ),
+      // guide:new FormControl('', [
+      //   Validators.required,
+      // ]
+      // ),
+    });
+  }
 
   ngOnInit(): void {
     this.holidayService.getHolodays().subscribe((data: any) => {
       this.holidaysList = data;
-      console.log("holidays: "+this.holidaysList);
+    });
+
+    this.hotelService.getCities().subscribe((data: any) => {
+      this.cities = data;
+      
     });
   }
 
@@ -36,20 +92,24 @@ export class HolidayComponent implements OnInit {
 
   handleSubmit(holiday: any) {
    
-      
+    if(this.holidayForm.valid){
+      console.log("valid");
     if (this.editMode) {
       
       this.holidayService.updateHoliday(this.currentHolidayID, holiday)
       .subscribe((data: any) => {
-        alert('holiday data updated ')
-  
+        this.notifyService.showSuccess("holiday updated successfully !!", "Notification")
       })
     } else {
       this.holidayService.postHoliday(holiday).subscribe((data: any) => {
-        alert('new holiday added ')
-  
+        this.notifyService.showSuccess("holiday added successfully !!", "Notification")
+
       })
     }
+  }else{
+    console.log('not valid: ')
+
+  }
 
   }
 
@@ -60,14 +120,14 @@ export class HolidayComponent implements OnInit {
     console.log(this.currentHolidayID);
     
     let currentHoliday = this.holidaysList.find((holiday) => { return holiday._id === id })
-    this.form.setValue({
+    this.holidayForm.patchValue({
       city: currentHoliday?.City,
       evaluation: currentHoliday?.Evaluation,
       img: currentHoliday?.ImgURL,
       period: currentHoliday?.Period,
       description: currentHoliday?.Description,
       price: currentHoliday?.Price,
-      guide: currentHoliday?.Guide
+      // guide: currentHoliday?.Guide
 
     })
 
