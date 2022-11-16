@@ -16,12 +16,31 @@ import { FlightsComponent } from './components/flights/flights.component';
 import { HolidayComponent } from './components/holiday/holiday.component';
 import { TourguidComponent } from './components/tourguid/tourguid.component';
 import { BodyComponent } from './components/body/body.component';
-import { HotelFormComponent } from './components/hotel-form/hotel-form.component';
-import { HolidayFormComponent } from './components/holiday-form/holiday-form.component';
-import { UpdHotelFormComponent } from './components/upd-hotel-form/upd-hotel-form.component';
+import { BookedHotelsComponent } from './components/booked-hotels/booked-hotels.component';
+import { BookedHolidaysComponent } from './components/booked-holidays/booked-holidays.component';
+import { CityComponent } from './components/city/city.component';
+
+import { httpInterceptorProviders } from './helpers/http-request.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [AppComponent, LogginComponent, RegisterComponent, DashboardComponent, SidebarComponent, UsersComponent, HotelsComponent, FlightsComponent, HolidayComponent, TourguidComponent, BodyComponent, HotelFormComponent, HolidayFormComponent, UpdHotelFormComponent],
+  declarations: [
+    AppComponent,
+    LogginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    SidebarComponent,
+    UsersComponent,
+    HotelsComponent,
+    FlightsComponent,
+    HolidayComponent,
+    TourguidComponent,
+    BodyComponent,
+    BookedHotelsComponent,
+    BookedHolidaysComponent,
+    CityComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,9 +48,10 @@ import { UpdHotelFormComponent } from './components/upd-hotel-form/upd-hotel-for
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
