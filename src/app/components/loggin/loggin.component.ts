@@ -3,6 +3,7 @@ import { IUser } from '../../interfaces/iuser';
 import { ICredentials } from '../../interfaces/icredentials';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-loggin',
@@ -12,23 +13,51 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LogginComponent implements OnInit {
   credentials: ICredentials = {} as ICredentials;
   user: IUser = {} as IUser;
-  constructor(private authService: AuthAPIServiceService) {}
 
-  ngOnInit(): void {}
+  isLoggedIn = false;
+  isLoginFailed = false;
+  roles: string[] = [];
+
+  constructor(
+    private authService: AuthAPIServiceService,
+    private storageService: StorageService
+  ) {}
+
+  ngOnInit(): void {
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.roles = this.storageService.getUser().roles;
+    }
+  }
   logginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+    ]),
   });
   onSubmit() {
     const observer = {
       next: (data: IUser) => {
         this.user = data;
+        this.storageService.saveUser(data);
       },
-      error: (err: Error) => alert(err.message),
-      complete: () => console.log('loggedIn', this.user),
+      complete: () => {
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.storageService.getUser().roles;
+        this.reloadPage();
+      },
     };
     if (this.logginForm.valid) {
       this.authService.loggin(this.logginForm.value).subscribe(observer);
     }
+  }
+  reloadPage(): void {
+    window.location.reload();
   }
 }

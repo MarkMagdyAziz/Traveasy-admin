@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthAPIServiceService } from 'src/app/services/auth-apiservice.service';
-import { ICredentials } from '../../interfaces/icredentials';
 import { IUser } from '../../interfaces/iuser';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +11,15 @@ import { IUser } from '../../interfaces/iuser';
 })
 export class RegisterComponent implements OnInit {
   response: string = '';
-
   user: IUser = {} as IUser;
-  constructor(private authService: AuthAPIServiceService) {}
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage: any;
+
+  constructor(
+    private authService: AuthAPIServiceService,
+    private storageService: StorageService
+  ) {}
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     username: new FormControl('', [
@@ -24,14 +30,17 @@ export class RegisterComponent implements OnInit {
     firstName: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
+      Validators.pattern('^[a-zA-Z]+$'),
     ]),
     lastName: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
+      Validators.pattern('^[a-zA-Z]+$'),
     ]),
     country: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
+      Validators.pattern('^[a-zA-Z]+$'),
     ]),
 
     password: new FormControl('', [
@@ -44,10 +53,16 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     const observer = {
       next: (response: any) => {
-        this.response = response.message;
         console.log(response);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+        this.response = response.message;
       },
-      error: (err: Error) => alert(err.message),
+      error: (err: Error) => {
+        this.isSignUpFailed = true;
+        this.errorMessage = err.message;
+        alert(err.message);
+      },
       complete: () => console.log('Registered Successfuly!'),
     };
     if (this.registerForm.valid) {
