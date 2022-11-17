@@ -19,10 +19,29 @@ import { BodyComponent } from './components/body/body.component';
 import { BookedHotelsComponent } from './components/booked-hotels/booked-hotels.component';
 import { BookedHolidaysComponent } from './components/booked-holidays/booked-holidays.component';
 import { CityComponent } from './components/city/city.component';
+
+import { httpInterceptorProviders } from './helpers/http-request.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+
+
 @NgModule({
-  declarations: [AppComponent, LogginComponent, RegisterComponent, DashboardComponent, SidebarComponent, UsersComponent, HotelsComponent, FlightsComponent, HolidayComponent, TourguidComponent, BodyComponent, BookedHotelsComponent, BookedHolidaysComponent, CityComponent],
+  declarations: [
+    AppComponent,
+    LogginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    SidebarComponent,
+    UsersComponent,
+    HotelsComponent,
+    FlightsComponent,
+    HolidayComponent,
+    TourguidComponent,
+    BodyComponent,
+    BookedHotelsComponent,
+    BookedHolidaysComponent,
+    CityComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,9 +50,9 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-	ToastrModule.forRoot()
+ ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

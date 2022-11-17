@@ -10,7 +10,7 @@
           <div class="card-body p-lg-5">
             <h3 class="mb-4">Get started</h3>
 
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" #f="ngForm">
               <div class="form-floating mb-3">
                 <input class="form-control" id="email" type="email" placeholder="name@example.com" required
                   formControlName="email">
@@ -76,9 +76,14 @@
                 <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid">Register</button>
               </div>
             </form>
+            <div class="alert alert-success" *ngIf="isSuccessful">
+              Your registration is successful!
+            </div>
+            <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+              Signup failed!<br />{{ errorMessage }}
+            </div>
             <div class="text-center text-success">
               <h3>{{response}}</h3>
-
             </div>
           </div>
         </div>

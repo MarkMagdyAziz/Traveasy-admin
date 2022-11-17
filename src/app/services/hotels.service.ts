@@ -1,146 +1,85 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Icity } from '../interfaces/icity';
 import { Ihotel } from '../interfaces/ihotel';
 
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HotelsService {
+  selectedID: String = '';
+  selectedHotel: any = {};
 
-  selectedID : String = '';
-  selectedHotel : any = {} ;
+  constructor(private HttpClient: HttpClient) {}
 
-
-  constructor(  
-      private HttpClient : HttpClient
-) {
-
-
- }
-
-private handleError(error: HttpErrorResponse){
-  if(error.status === 0){
-    console.error('an error ocuured: ', error.error)
-
-  }else{
-    console.error(`Backend returned code ${error.status}, body was: `, error.error)
+  getHotels(): Observable<any> {
+    return this.HttpClient.get<Ihotel[]>(`${environment.BasicURL}hotel`)
   }
-  return throwError(
-    ()=> new Error('error occured, please try again. ')
-  )
-}
 
-getHotels(): Observable<any>{
-  return this.HttpClient.get<Ihotel[]>(`${environment.BasicURL}hotel`)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
+  // post
+  postHotel(newHotel: Ihotel): Observable<Ihotel> {
+    return this.HttpClient.post<Ihotel>(
+      `${environment.BasicURL}hotel`,
+      JSON.stringify(newHotel)
     )
-}
+  }
 
-// post
-postHotel(newHotel:Ihotel) : Observable<Ihotel>{
-  return this.HttpClient.post<Ihotel>(`${environment.BasicURL}hotel`,    
-   JSON.stringify(newHotel),httpOptions)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
-    )}
-
-
-
-
-    updateHotel(id: string,newHotel:any) : Observable<Ihotel>{  
-      return this.HttpClient.put<Ihotel>(`${environment.BasicURL}hotel/${id}`,
-       JSON.stringify(newHotel),httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-        ) }
-
-
-
-deleteHotel(id:any) {
-  return this.HttpClient.delete(`${environment.BasicURL}hotel/${id}`,httpOptions)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
+  updateHotel(id: string, newHotel: any): Observable<Ihotel> {
+    return this.HttpClient.put<Ihotel>(
+      `${environment.BasicURL}hotel/${id}`,
+      JSON.stringify(newHotel)
     )
-}
+  }
 
-// get cities
-getCities(): Observable<any>{
-  return this.HttpClient.get<Icity[]>(`${environment.BasicURL}city`)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
+  deleteHotel(id: any) {
+    return this.HttpClient.delete(`${environment.BasicURL}hotel/${id}`)
+  }
+
+  // get cities
+  getCities(): Observable<any> {
+    return this.HttpClient.get<Icity[]>(`${environment.BasicURL}city`)
+  }
+
+  // post cities
+  postCities(newCity: Icity): Observable<Icity> {
+    return this.HttpClient.post<Icity>(
+      `${environment.BasicURL}city`,
+      JSON.stringify(newCity)
     )
-}
+  }
 
-// post cities
-postCities(newCity:Icity) : Observable<Icity>{
-  return this.HttpClient.post<Icity>(`${environment.BasicURL}city`,    
-   JSON.stringify(newCity),httpOptions)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
-    )}
+  deleteCity(id: any) {
+    return this.HttpClient.delete(`${environment.BasicURL}city/${id}`)
+  }
 
+  /********************Booked hotels*************************************** */
 
-    deleteCity(id:any) {
-      return this.HttpClient.delete(`${environment.BasicURL}city/${id}`,httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-        )
-    }
-
-/********************Booked hotels*************************************** */
-
-
-getBookedHotels(): Observable<any>{
-  return this.HttpClient.get<Ihotel[]>(`${environment.BasicURL}bookedHotel`)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
+  getBookedHotels(): Observable<any> {
+    return this.HttpClient.get<Ihotel[]>(
+      `${environment.BasicURL}bookedHotel`
     )
-}
+  }
 
-
-
-    updateBookedHotels(id: string,newHotel:any) : Observable<Ihotel>{  
-      return this.HttpClient.put<Ihotel>(`${environment.BasicURL}bookedHotel/${id}`,
-       JSON.stringify(newHotel),httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-        ) }
-
-
-
-deleteBookedHotels(id:any) {
-  return this.HttpClient.delete(`${environment.BasicURL}bookedHotel/${id}`,httpOptions)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
+  updateBookedHotels(id: string, newHotel: any): Observable<Ihotel> {
+    return this.HttpClient.put<Ihotel>(
+      `${environment.BasicURL}bookedHotel/${id}`,
+      JSON.stringify(newHotel)
     )
+  }
+
+  deleteBookedHotels(id: any) {
+    return this.HttpClient.delete(
+      `${environment.BasicURL}bookedHotel/${id}`
+    )
+  }
 }
 
 
 // calc total price
 getBookedHotelsTotalPrice(id:any): Observable<any>{
   return this.HttpClient.get<Ihotel[]>(`${environment.BasicURL}bookedHotel/agg?id=${id}`)
-  .pipe(
-    retry(2),
-    catchError(this.handleError)
-    )
+  
 }
 }
