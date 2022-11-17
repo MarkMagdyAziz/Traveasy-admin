@@ -38,8 +38,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           this.toastr.error(`Error: ${error.error.message}`);
         } else {
           console.log('this is server side error');
+          console.log('error inside interceptor', error);
+
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-          console.log(error);
           this.toastr.error(`Error: ${error.error.message}`);
         }
         return throwError(() => new Error(errorMsg));

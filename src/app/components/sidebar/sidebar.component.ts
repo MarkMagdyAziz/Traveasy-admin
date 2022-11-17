@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       routerLink: 'bookedHotel',
-      icon: 'fa-solid fa-earth-americas',
+      icon: 'fa-solid fa-check',
       label: 'Booked Hotels',
     },
     {
@@ -62,13 +62,13 @@ export class SidebarComponent implements OnInit {
     },
     {
       routerLink: 'bookedHoliday',
-      icon: 'fa-solid fa-file-invoice',
+     icon: 'fa-solid fa-file-invoice',
       label: 'Booked Holidays',
     },
     {
       routerLink: 'tourguid',
       icon: 'fa-solid fa-earth-americas',
-      label: 'Tour Guid',
+      label: 'Tour Guide',
     },
     {
       routerLink: "city",
