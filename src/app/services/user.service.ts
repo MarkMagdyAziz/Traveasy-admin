@@ -25,4 +25,7 @@ export class UserService {
       `${environment.BasicURL}admin/users/remove/${userId}`
     );
   }
+  getStatistics(): Observable<any> {
+    return this.http.get<any>(`${environment.BasicURL}admin/statistics/`);
+  }
 }
