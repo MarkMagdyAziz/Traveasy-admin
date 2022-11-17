@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+ ToastrModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

@@ -3,7 +3,10 @@ import { Ihotel } from 'src/app/interfaces/ihotel';
 import { HotelsService } from 'src/app/services/hotels.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Icity } from 'src/app/interfaces/icity';
 
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-hotels',
@@ -13,24 +16,26 @@ import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angula
 export class HotelsComponent implements OnInit {
 
   hotelsList: Ihotel[] = []
-  // @ViewChild('hotelForm') form!: NgForm
 
- form!: FormGroup
 
+  form: FormGroup;
   editMode: boolean = false;
   postMode: boolean = false;
   currentHotelId: string = '';
-
+  cities: Icity[] = [];
+  closeResult = '';
 
   constructor(
     private hotelService: HotelsService,
-    private router: Router,
-    private fb : FormBuilder
+    private fb: FormBuilder,
+    private notifyService: NotificationService,
+    private modalService: NgbModal
+
 
   ) {
 
     this.form = this.fb.group({
-      hotelName:new FormControl(
+      hotelName: new FormControl(
         '',
         [
           Validators.required,
@@ -38,7 +43,7 @@ export class HotelsComponent implements OnInit {
           Validators.maxLength(25),
         ],
       ),
-      city:new FormControl(
+      city: new FormControl(
         '',
         [
           Validators.required,
@@ -46,66 +51,104 @@ export class HotelsComponent implements OnInit {
           Validators.maxLength(25),
         ],
       ),
-      img:new FormControl('',[Validators.required]),
+      img: new FormControl(
+        '', [Validators.required]
+      ),
 
       evaluation:
-      ['', [
-        Validators.required,
-        Validators.min(0),
-        Validators.max(5)]
-      ],
-      period:new FormControl('', [
+        new FormControl(['', [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(5)]
+        ]),
+      period: new FormControl('', [
         Validators.required,
         Validators.min(0),
       ]
       ),
-      description:new FormControl(
+      description: new FormControl(
         '',
         [
           Validators.required,
           Validators.minLength(3),
         ],
       ),
-      lat:new FormControl('', [
+      lat: new FormControl('', [
         Validators.required,
-        ]
+      ]
       ),
-      lon:new FormControl('', [
+      lon: new FormControl('', [
         Validators.required,
-       ]
+      ]
       ),
-      price:new FormControl('', [
+      price: new FormControl('', [
         Validators.required,
-        Validators.min(0),]
+        Validators.min(0)
+      ]
       ),
     });
   }
+
+  // ng-modal :
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
   ngOnInit(): void {
     this.hotelService.getHotels().subscribe((data: any) => {
       this.hotelsList = data;
     });
 
+    this.hotelService.getCities().subscribe((data: any) => {
+      this.cities = data;
+    });
   }
   showForm() {
     this.postMode = true;
   }
 
   handleSubmit(hotel: any) {
-    if(this.form.valid){
-      console.log("valid");
-      
-    if (this.editMode) {
-      this.hotelService.updateHotel(this.currentHotelId, hotel).subscribe();
-      alert('hotel data updated ')
+
+    const observer = {
+      next: () => {
+        this.notifyService.showSuccess("hotel updated successfully !!", "Notification")
+        this.form.reset();
+        this.hotelService.getHotels().subscribe((data: any) => {
+          this.hotelsList = data;
+        });
+      },
+      error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
+    };
+
+    if (this.form.valid) {
+
+      if (this.editMode) {
+
+        this.hotelService.updateHotel(this.currentHotelId, hotel).subscribe(observer);
+      } else {
+        this.hotelService.postHotel(hotel).subscribe(observer)
+      }
     } else {
-      this.hotelService.postHotel(hotel).subscribe((data: any) => {
-        alert('new hotel added ')
-  
-      })
-    }}else{
-      console.log('not valid' );
-      
+      this.notifyService.showDanger("Not Valid Data !!", "Notification")
+
     }
 
   }
@@ -114,7 +157,7 @@ export class HotelsComponent implements OnInit {
 
     this.currentHotelId = id;
     let currentHotel = this.hotelsList.find((hotel) => { return hotel._id === id })
-    this.form.setValue({
+    this.form.patchValue({
       hotelName: currentHotel?.HotelName,
       city: currentHotel?.City,
       evaluation: currentHotel?.Evaluation,
@@ -126,7 +169,6 @@ export class HotelsComponent implements OnInit {
       price: currentHotel?.Price
 
     })
-    console.log(this.form);
 
     this.editMode = true;
 
@@ -139,12 +181,12 @@ export class HotelsComponent implements OnInit {
   handleDelete(id: any) {
     const observer = {
       next: () => {
-        console.log('removed succesfully');
+        this.notifyService.showDanger("removed succesfully !!", "Notification")
         this.hotelService.getHotels().subscribe((data: any) => {
           this.hotelsList = data;
         });
       },
-      error: (err: Error) => alert(err.message),
+      error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
     };
     this.hotelService.deleteHotel(id).subscribe(observer);
   }

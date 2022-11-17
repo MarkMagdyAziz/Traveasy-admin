@@ -62,13 +62,18 @@ export class SidebarComponent implements OnInit {
     },
     {
       routerLink: 'bookedHoliday',
-      icon: 'fa-solid fa-champagne-glasses',
+     icon: 'fa-solid fa-file-invoice',
       label: 'Booked Holidays',
     },
     {
       routerLink: 'tourguid',
       icon: 'fa-solid fa-earth-americas',
       label: 'Tour Guide',
+    },
+    {
+      routerLink: "city",
+      icon:"fa-solid fa-earth-americas",
+      label:"City"
     },
   ];
 
