@@ -84,10 +84,7 @@ export class FlightsComponent implements OnInit {
                   Validators.required
                  ]
                  ),
-              });
-
-
-   
+              });   
   }
 
   // ng-modal :
