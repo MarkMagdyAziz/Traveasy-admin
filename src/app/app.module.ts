@@ -19,11 +19,13 @@ import { BodyComponent } from './components/body/body.component';
 import { BookedHotelsComponent } from './components/booked-hotels/booked-hotels.component';
 import { BookedHolidaysComponent } from './components/booked-holidays/booked-holidays.component';
 import { CityComponent } from './components/city/city.component';
-
 import { httpInterceptorProviders } from './helpers/http-request.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AirlineComponent } from './components/airline/airline.component';
+import { FlightBookingComponent } from './components/flight-booking/flight-booking.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     BookedHotelsComponent,
     BookedHolidaysComponent,
     CityComponent,
+    AirlineComponent,
+    FlightBookingComponent,
     ImageUploadComponent,
   ],
   imports: [

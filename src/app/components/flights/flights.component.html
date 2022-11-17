@@ -1,1 +1,177 @@
-<p>flights works!</p>
+<section class="users">
+    <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <div class="icon" data-aos="fade-up" data-aos-duration="350">
+            <i class="fa-solid fa-users"></i>
+        </div>
+        <article data-aos="fade-up" data-aos-duration="400">
+            <span>46</span>
+            <p> Users </p>
+        </article>
+    </div>  <br> <br><br>
+    <!-- Large modal -->
+<button type="button" class="orangeBtn" data-toggle="modal"  (click)="open(content)">New</button>
+ <br><br>
+    <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+            <td>FlyingFrom</td>
+            <td>FlyingTo</td>
+            <td>DepartureDate</td>
+            <td>ReturnDate</td>
+            <td>Trip Number</td>
+            <td>Seat no</td>
+            <td>Infant</td>
+            <td>CabinClass</td>
+            <td>Price</td>
+            <td>NumberTickets</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </thead>
+        <tbody>
+
+             <tr data-aos="fade-up" *ngFor="let Item of FlightsList" data-aos-anchor-placement="center-bottom"
+                data-aos-duration="400">
+                <td>{{Item.FlyingFrom}}</td>
+                <td>{{Item.FlyingTo}}</td>
+                <td>{{Item.DepartureDate}}</td>
+                <td>{{Item.ReturnDate}}</td>
+                <td>{{Item.TravellerCount}}</td>
+                <td>{{Item.Child}}</td>
+                <td>{{Item.Infant}}</td>
+                <td>{{Item.CabinClass}}</td>
+                <td>{{Item.Price}}</td>
+                <td>{{Item.NumberTickets}}</td>
+                
+                <td><button class="orangeBtn"  >Edit</button></td>
+                <td><button class="redBtn" >Delete</button></td>
+            </tr> 
+
+        </tbody>
+    </table>
+</section>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Flight</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+  
+    <div class="modal-body">
+      <form  [formGroup]="form" (ngSubmit)="FunSubmit(form.value)">
+  
+        <div class="mb-3">
+          <label for="FlyingFrom" class="form-label">FlyingFrom</label>
+          <input required type="text" name="country" class="form-control" id="FlyingFrom" formControlName="FlyingFrom" ngModel>
+
+          <datalist id="country">
+            <option value="Egypt" ></option>
+            <option value="Roma"  ></option>
+            <option value="UAE"  ></option>
+            <option value="USA" ></option>
+            <option value="Paris"  ></option>
+          </datalist>
+
+          <div class="alert alert-warning" *ngIf="form.controls['FlyingFrom'].invalid && (form.dirty || form.touched)">
+            <small> FlyingFrom is required & FlyingFrom must be atleast 3 letters</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="FlyingTo" class="form-label">FlyingTo</label>
+            <input required type="text" name="country" class="form-control" id="FlyingTo" formControlName="FlyingTo" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['FlyingTo'].invalid && (form.dirty || form.touched)">
+              <small> FlyingTo is required & FlyingTo must be atleast 3 letters</small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="DepartureDate" class="form-label">DepartureDate</label>
+            <input required type="date" class="form-control" id="DepartureDate" formControlName="DepartureDate" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['DepartureDate'].invalid && (form.dirty || form.touched)">
+              <small> DepartureDate is required & DepartureDate must be atleast 3 letters</small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="ReturnDate" class="form-label">ReturnDate</label>
+            <input required type="date" class="form-control" id="ReturnDate" formControlName="ReturnDate" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['ReturnDate'].invalid && (form.dirty || form.touched)">
+              <small> ReturnDate is required & ReturnDate must be atleast 3 letters</small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="TravellerCount" class="form-label">Trip Number</label>
+            <input required type="text" class="form-control" id="TravellerCount" formControlName="TravellerCount" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['TravellerCount'].invalid && (form.dirty || form.touched)">
+              <small> Trip Number Numberunt is required </small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="Child" class="form-label">Seat no</label>
+            <input required type="number" class="form-control" id="Child" formControlName="Child" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['Child'].invalid && (form.dirty || form.touched)">
+              <small> Seat no is required </small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="Infant" class="form-label">Infant</label>
+            <input required type="text" class="form-control" id="Infant" formControlName="Infant" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['Infant'].invalid && (form.dirty || form.touched)">
+              <small> Infant is required & Infant must be atleast 3 letters</small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="CabinClass" class="form-label">CabinClass</label>
+            <input required type="text" name="daCabinClass" class="form-control" id="CabinClass" formControlName="CabinClass" ngModel>
+            <datalist id="daCabinClass">
+                <option value="first"></option>
+                <option value="business"></option>
+                <option value="economy"></option>
+              </datalist>
+
+            <div class="alert alert-warning" *ngIf="form.controls['CabinClass'].invalid && (form.dirty || form.touched)">
+              <small> CabinClass is required </small>
+            </div>
+
+            
+
+          </div>
+
+          <div class="mb-3">
+            <label for="Price" class="form-label">Price</label>
+            <input required type="number" class="form-control" id="Price" formControlName="Price" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['Price'].invalid && (form.dirty || form.touched)">
+              <small> Price is required </small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="NumberTickets" class="form-label">NumberTickets</label>
+            <input required type="number" class="form-control" id="NumberTickets" formControlName="NumberTickets" ngModel>
+            <div class="alert alert-warning" *ngIf="form.controls['NumberTickets'].invalid && (form.dirty || form.touched)">
+              <small> NumberTickets is required </small>
+            </div>
+          </div>
+
+          
+        <div class="mb-3 ">
+          <p>Airline</p>
+  
+          <div *ngFor="let i of AirlineList">
+            <input class="me-1"  type="radio" id="{{i?._id}}" formControlName="Airline" [value]="i?._id"
+              ngModel>
+            <label class="form-label" for="{{i?._id }}">{{i?.AirlineName}}</label> <br>
+          </div>
+           <div class="alert alert-warning" *ngIf="form.controls['Airline'].invalid ">
+            <small> This is required</small>
+          </div> 
+        </div><br><br>  
+        <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Submit</button>
+      </form>
+    </div>
+    </ng-template>
