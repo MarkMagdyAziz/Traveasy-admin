@@ -43,8 +43,8 @@
                 <td>{{i?.endDate| date:'MM/dd/yyyy '}}</td>
                 <td>{{i?.Holidays?._id }}</td>
                 <td>{{i?.Tourist?.username}}</td>
-                <!-- <td>{{i?.Guide}}</td> -->
-                <td><button class="orangeBtn" (click)="handleEditBtn(i?._id)">Edit</button></td>
+
+                <td><button class="orangeBtn" (click)="open(content)"  (click)="handleEditBtn(i?._id)">Edit</button></td>
                 <td><button class="redBtn"  (click)="handleDelete(i?._id)">Delete</button></td>
             </tr>
         </tbody>
@@ -52,11 +52,15 @@
 </section>
 <hr>
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Booked Holiday Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
 <form
  [hidden]="!editMode" [formGroup]="form" (ngSubmit)="handleSubmit(form.value)" >
-    <h1>Booked Holiday Details</h1>
-
-    <h1>update holiday</h1>
 
     <div class="mb-3 ">
       <p>is Approve?</p>
@@ -65,6 +69,11 @@
       <input    type="radio" id="true" formControlName="isApprove" value="true" > <br>
       <label class="me-3 fs-5" for="false"  >false</label>
       <input    type="radio" id="false" formControlName="isApprove" value="false" >
+    
+      <div class="alert alert-warning"
+      *ngIf="form.controls['isApprove'].invalid && (form.dirty || form.touched)">
+      <small> This is required</small>
+    </div>
     </div>
     <fieldset [disabled]="isDisabled">
 
@@ -107,11 +116,10 @@
         <label for="tourist" class="form-label">tourist</label>
         <input class="form-control"   type="text" id="tourist" formControlName="tourist" >
       </div>
-      <!-- <div class="mb-3">
-        <label for="guide" class="form-label">guide</label>
-        <input class="form-control"    type="text" id="guide" formControlName="guide" >
-      </div> -->
+  
       </fieldset>
 
-    <button type="submit"  class="btn btn-primary">Submit</button>
+    <button type="submit"  class="btn btn-primary"  (click)="modal.close('Save click')">Submit</button>
   </form>
+  </div>
+</ng-template>

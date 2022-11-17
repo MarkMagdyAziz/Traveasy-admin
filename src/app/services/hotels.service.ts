@@ -74,7 +74,7 @@ export class HotelsService {
       `${environment.BasicURL}bookedHotel/${id}`
     )
   }
-}
+
 
 
 // calc total price
