@@ -3,6 +3,7 @@ import {  HttpClient,  HttpErrorResponse,  HttpHeaders} from '@angular/common/ht
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IFlight } from '../interfaces/iflight';
+import { Iflightpost } from '../interfaces/iflightpost';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,8 @@ export class FlightServiceService {
   }
 
   // Creaete Flight add in database
-  postFlight(newFlight: IFlight): Observable<IFlight> {
-    return this.HttpClient.post<IFlight>(
+  postFlight(newFlight: Iflightpost): Observable<Iflightpost> {
+    return this.HttpClient.post<Iflightpost>(
       `${environment.BasicURL}flight`,
       JSON.stringify(newFlight)
     ).pipe(retry(2), catchError(this.handleError));

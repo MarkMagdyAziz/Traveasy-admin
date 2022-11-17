@@ -1,4 +1,5 @@
 export interface IAirline {
+    
     _id: String,
     AirlineName : string,
     Country: string,

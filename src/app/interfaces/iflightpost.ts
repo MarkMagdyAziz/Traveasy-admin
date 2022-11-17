@@ -1,6 +1,4 @@
-import { IAirline } from "./iairline";
-
-export interface IFlight {
+export interface Iflightpost {
     _id:String,
     FlyingFrom : String,
     FlyingTo : String,
@@ -13,6 +11,5 @@ export interface IFlight {
     Price : Number ,     
     IsBooking : Boolean  ,
     NumberTickets : Number ,
-    Airline : IAirline
-   
+    Airline : String
 }
