@@ -29,7 +29,7 @@
               <div
                 *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)"
                 class="alert alert-danger">
-                Username invalid
+                Username invalid, Use characters and numbers only
 
               </div>
               <div class="form-floating mb-3">
@@ -79,9 +79,7 @@
             <div class="alert alert-success" *ngIf="isSuccessful">
               Your registration is successful!
             </div>
-            <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-              Signup failed!<br />{{ errorMessage }}
-            </div>
+
             <div class="text-center text-success">
               <h3>{{response}}</h3>
             </div>

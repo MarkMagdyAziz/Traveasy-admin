@@ -26,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AirlineComponent } from './components/airline/airline.component';
 import { FlightBookingComponent } from './components/flight-booking/flight-booking.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,7 @@ import { FlightBookingComponent } from './components/flight-booking/flight-booki
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+ ToastrModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

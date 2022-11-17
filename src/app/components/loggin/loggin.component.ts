@@ -4,6 +4,7 @@ import { ICredentials } from '../../interfaces/icredentials';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loggin',
@@ -20,7 +21,8 @@ export class LogginComponent implements OnInit {
 
   constructor(
     private authService: AuthAPIServiceService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class LogginComponent implements OnInit {
     username: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
+      Validators.pattern('^[a-zA-Z0-9]*$'),
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -58,6 +61,11 @@ export class LogginComponent implements OnInit {
     }
   }
   reloadPage(): void {
-    window.location.reload();
+    if (this.isLoggedIn) {
+      this.router.navigate(['/dashboard']).then(() => {
+        window.location.reload();
+      });
+      this.roles = [];
+    }
   }
 }
