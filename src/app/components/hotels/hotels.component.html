@@ -6,7 +6,7 @@
             <i class="fa-solid fa-earth-asia"></i>
         </div>
         <article data-aos="fade-up" data-aos-duration="400">
-            <span>46</span>
+            <span>{{hotelsList.length}}</span>
             <p> Hotels </p>
         </article>
     </div>
@@ -54,55 +54,67 @@
 </section>
 <hr>
 
-<form [hidden]="!editMode && !postMode" #form="ngForm" (ngSubmit)="handleSubmit(form.value)" >
+<!-- #form="ngForm" -->
+<form [hidden]="!editMode && !postMode" [formGroup]="form"  (ngSubmit)="handleSubmit(form.value)" >
     <h1>Hotel Details</h1>
 
     <h1>update hotel</h1>
     <div class="mb-3">
       <label for="HotelName" class="form-label">HotelName</label>
-      <input type="text" class="form-control" id="HotelName"  name="hotelName" ngModel >
-      <!-- <div class="alert alert-warning" *ngIf="form.value['hotelName'].touched  && form.value['hotelName'].invalid ">
-        <small *ngIf="form.value['hotelName']?.errors?.['required']"> name is required</small>
-        </div> <small *ngIf="form['hotelName']?.errors?.['minLength']"> name must be atleast 5 letters</small>
-    </div> -->
+      <input required type="text" class="form-control" id="HotelName" formControlName="hotelName" ngModel >
+
+      <div class="alert alert-warning" *ngIf="form.controls['hotelName'].invalid && (form.dirty || form.touched)">
+        <small> name is required & name must be atleast 3 letters</small>
+      </div> 
     </div>
-    <div class="mb-3">
-      <label for="City" class="form-label">City</label>
-      <input  type="text" class="form-control" id="City" name="city" ngModel >
-    </div>
+    <div class="mb-3 ">
+      <p>City</p>
+
+<div *ngFor="let i of cities">
+  <input class="me-1"   type="radio" id="{{i?._id}}" formControlName="city" [value]="i?._id" ngModel >
+
+      <label   for="{{i?._id }}" >{{i?.City_Name}}</label> <br>
+   </div>
+  </div>
+
+
     <div class="mb-3 ">
         <label cclass="form-control" for="Evaluation">Evaluation</label>
 
-      <input  type="number" id="Evaluation" name="evaluation" ngModel >
+      <input required  type="number" id="Evaluation"formControlName="evaluation" ngModel >
     </div>
     <div class="mb-3">
         <label for="ImgURL" class="form-label">ImgURL</label>
-        <input  type="text" class="form-control" id="ImgURL" name="img" ngModel >
+        <input required  type="text" class="form-control" id="ImgURL"formControlName="img" ngModel >
       </div>
       <div class="mb-3 ">
         <label cclass="form-control" for="Period">Period</label>
 
-        <input  type="number" id="Period" name="period" ngModel >
+        <input required  type="number" id="Period"formControlName="period" ngModel >
       </div>
 
       <div class="mb-3">
         <label for="Description" class="form-label">Description</label>
-        <input  type="text" class="form-control"  name="description" ngModel id="Description">
+        <input required  type="text" class="form-control" formControlName="description" ngModel id="Description">
       </div>
       <div class="mb-3">
         <label for="lat" class="form-label">lat</label>
-        <input  type="text" class="form-control" id="lat" name="lat" ngModel >
+        <input required  type="text" class="form-control" id="lat"formControlName="lat" ngModel >
       </div>
 
       <div class="mb-3">
         <label for="lon" class="form-label">lon</label>
-        <input  type="text" class="form-control" id="lon" name="lon" ngModel >
+        <input required  type="text" class="form-control" id="lon"formControlName="lon" ngModel >
       </div>
       <div class="mb-3 ">
         <label cclass="form-control" for="Price">Price</label>
 
-        <input  type="number" id="Price" name="price" ngModel >
+        <input required  type="number" id="Price"formControlName="price" ngModel >
       </div>
+      <br>
+      <br>
+      <p>Form Status: {{ form.status }}</p>
 
-    <button type="submit" value="{(editMode ? 'Update' : 'Add')}" class="btn btn-primary">Submit</button>
+<!--  [disabled]="this.form.status =='INVALID'"  -->
+    <button type="submit" value="{(editMode ? 'Update' : 'Add')}"class="btn btn-primary">Submit</button>
   </form>
