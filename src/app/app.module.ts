@@ -23,6 +23,7 @@ import { CityComponent } from './components/city/city.component';
 import { httpInterceptorProviders } from './helpers/http-request.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
     BookedHotelsComponent,
     BookedHolidaysComponent,
     CityComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,

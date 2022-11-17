@@ -1,3 +1,4 @@
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookedHolidaysComponent } from './components/booked-holidays/booked-holidays.component';
@@ -49,6 +50,11 @@ const routes: Routes = [
     canActivate: [AuthGuardGuard],
   },
   { path: 'city', component: CityComponent, canActivate: [AuthGuardGuard] },
+  {
+    path: 'upload',
+    component: ImageUploadComponent,
+    canActivate: [AuthGuardGuard],
+  },
 ];
 
 @NgModule({
