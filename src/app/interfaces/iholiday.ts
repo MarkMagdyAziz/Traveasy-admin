@@ -1,6 +1,7 @@
+
 export interface Iholiday {
   _id: String,
-  City: [String],
+  City: any,
   Description: String,
   Evaluation: Number,
   ImgURL: [String],

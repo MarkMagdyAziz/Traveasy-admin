@@ -62,7 +62,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       routerLink: 'bookedHoliday',
-      icon: 'fa-solid fa-earth-americas',
+      icon: 'fa-solid fa-file-invoice',
       label: 'Booked Holidays',
     },
     {

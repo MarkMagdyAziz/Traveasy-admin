@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { IBHoliday } from 'src/app/interfaces/ibholiday';
 import { HolidayService } from 'src/app/services/holiday.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-booked-holidays',
@@ -19,9 +21,13 @@ export class BookedHolidaysComponent implements OnInit {
   
   currentHolidayId: string = '';
 
+  closeResult = '';
+
   constructor(
     private holidayService : HolidayService,
-    private fb : FormBuilder
+    private notifyService: NotificationService,
+    private fb : FormBuilder,
+    private modalService: NgbModal
 
   ) { 
     this.form = this.fb.group({
@@ -66,7 +72,7 @@ export class BookedHolidaysComponent implements OnInit {
       ),
       period:new FormControl('', [
         Validators.required,
-        Validators.min(0),
+        Validators.min(1),
       ]
       ),
      
@@ -78,12 +84,32 @@ export class BookedHolidaysComponent implements OnInit {
         Validators.required,
       ]
       ),
-      // guide:new FormControl('', [
-      //   Validators.required,
-      // ]
-      // ),
     });
   }
+
+  
+  // ng-modal :
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
   ngOnInit(): void {
     this.holidayService.getBookedHolodays().subscribe((data: any) => {
@@ -95,18 +121,25 @@ export class BookedHolidaysComponent implements OnInit {
 
 
 handleSubmit(holiday: any) {
+  const observer = {
+    next: () => {
+      this.notifyService.showSuccess("'booked holiday data updated successfully !!", "Notification")
+      this.holidayService.getBookedHolodays().subscribe((data: any) => {
+        this.bookedList = data;
+      });
+    },
+    error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
+  };
   if(this.form.valid){
 
-    console.log("valid");
-
     if (this.editMode) {    
-    this.holidayService.updateBookedHolodays(this.currentHolidayId, holiday).subscribe();
-    alert('booked holiday data updated ')
+    this.holidayService.updateBookedHolodays(this.currentHolidayId, holiday).subscribe(observer);
+
   }
   
 }
   else{
-    console.log('not valid: ' + this.form.valid);
+    this.notifyService.showDanger("Not Valid Data !!", "Notification")
   }
 
 }
@@ -126,7 +159,6 @@ handleEditBtn(id: any) {
   endDate: currentHoloday?.endDate,
   holidays : currentHoloday?.Holidays,
   tourist :currentHoloday?.Tourist,
-  // guide :currentHoloday?.Guide
   })
   console.log(this.form);
 
@@ -141,12 +173,12 @@ handleEditBtn(id: any) {
 handleDelete(id: any) {
   const observer = {
     next: () => {
-     alert('removed succesfully');
+      this.notifyService.showDanger("removed succesfully !!", "Notification")
       this.holidayService.getBookedHolodays().subscribe((data: any) => {
         this.bookedList = data;
       });
     },
-    error: (err: Error) => alert(err.message),
+    error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
   };
   this.holidayService.deleteBookedHolodays(id).subscribe(observer);
 }
