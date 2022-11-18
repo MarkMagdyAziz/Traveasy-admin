@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthAPIServiceService } from 'src/app/services/auth-apiservice.service';
 import { IUser } from '../../interfaces/iuser';
 import { StorageService } from 'src/app/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,18 +15,19 @@ export class RegisterComponent implements OnInit {
   user: IUser = {} as IUser;
   isSuccessful = false;
   isSignUpFailed = false;
-  errorMessage: any;
 
   constructor(
     private authService: AuthAPIServiceService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     username: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
-      Validators.maxLength(15),
+      Validators.maxLength(20),
+      Validators.pattern('^[a-zA-Z0-9]*$'),
     ]),
     firstName: new FormControl('', [
       Validators.required,
@@ -53,17 +55,15 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     const observer = {
       next: (response: any) => {
-        console.log(response);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.response = response.message;
       },
       error: (err: Error) => {
+        console.log(err);
         this.isSignUpFailed = true;
-        this.errorMessage = err.message;
-        alert(err.message);
       },
-      complete: () => console.log('Registered Successfuly!'),
+      complete: () => this.router.navigate(['/login']),
     };
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe(observer);
