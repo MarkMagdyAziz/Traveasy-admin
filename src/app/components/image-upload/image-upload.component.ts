@@ -19,7 +19,7 @@ export class ImageUploadComponent implements OnInit {
     this.imageInfos = this.uploadService.getFiles();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   selectFiles(event: any): void {
     this.message = [];
@@ -71,7 +71,9 @@ export class ImageUploadComponent implements OnInit {
           this.progressInfos[idx].value = 0;
           const msg = 'Could not upload the file: ' + file.name;
           this.message.push(msg);
+          this.uploadService.isFile = false
         },
+        complete: () => this.uploadService.isFile = false
       });
     }
   }
