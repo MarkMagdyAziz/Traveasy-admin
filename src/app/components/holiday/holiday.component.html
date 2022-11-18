@@ -83,7 +83,8 @@
       </div>
       <div class="mb-3">
         <label for="ImgURL" class="form-label">Img URL</label> <br>
-        <input type="text" class="form-control" id="ImgURL" formControlName="img" ngModel>
+        <!-- <input type="text" class="form-control" id="ImgURL" formControlName="img" ngModel> -->
+      <app-image-upload></app-image-upload>
         <div class="alert alert-warning"
           *ngIf="holidayForm.controls['img'].invalid && (holidayForm.dirty || holidayForm.touched)">
           <small> This is required</small>
