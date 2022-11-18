@@ -15,11 +15,11 @@
   <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
     data-aos-duration="300">
     <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
-      <td>Id</td>
+      <!-- <td>Id</td> -->
       <td>City</td>
       <td>Evaluation</td>
-      <td>ImgURL</td>
-      <td>Period</td>
+      <td>Img URL</td>
+      <td>Period (in days)</td>
       <td>Description</td>
       <td>Price</td>
 
@@ -31,7 +31,7 @@
 
       <tr data-aos="fade-up" *ngFor="let i of holidaysList" data-aos-anchor-placement="center-bottom"
         data-aos-duration="400">
-        <td>{{i?._id}}</td>
+        <!-- <td>{{i?._id}}</td> -->
         <td>{{i?.City?.City_Name}}</td>
         <td>{{i?.Evaluation}}</td>
         <td>{{i?.ImgURL}}</td>
@@ -82,7 +82,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="ImgURL" class="form-label">ImgURL</label> <br>
+        <label for="ImgURL" class="form-label">Img URL</label> <br>
         <input type="text" class="form-control" id="ImgURL" formControlName="img" ngModel>
         <div class="alert alert-warning"
           *ngIf="holidayForm.controls['img'].invalid && (holidayForm.dirty || holidayForm.touched)">
@@ -90,7 +90,7 @@
         </div>
       </div>
       <div class="mb-3 ">
-        <label for="Period">Period</label> <br>
+        <label for="Period">Period (in days)</label> <br>
         <input class="form-control" type="number" min="1" id="Period" formControlName="period" ngModel>
         <div class="alert alert-warning"
           *ngIf="holidayForm.controls['period'].invalid && (holidayForm.dirty || holidayForm.touched)">

@@ -15,16 +15,16 @@
     <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
         data-aos-duration="300">
         <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
-            <td>Id</td>
-            <td>RoomCount</td>
-            <td>AdultCount</td>
+            <!-- <td>Id</td> -->
+            <td>Room Count</td>
+            <td>Adult Count</td>
             <td>Child</td>
-            <td>Period</td>
+            <td>Period (in days)</td>
             <td>Single</td>
             <td>Double</td>
-            <td>IsApprove</td>
-            <td>startDate</td>
-            <td>endDate</td>
+            <td>Is Approve</td>
+            <td>Start Date</td>
+            <td>End Date</td>
             <td>Hotels</td>
             <td>Tourist</td>
             <!-- <td>Guide</td> -->
@@ -35,7 +35,7 @@
         <tbody>
  
             <tr data-aos="fade-up" *ngFor="let i of bookedList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
-                <td>{{i?._id}}</td>
+                <!-- <td>{{i?._id}}</td> -->
                 <td>{{i?.RoomCount}}</td>
                 <td>{{i?.AdultCount}}</td>
                 <td>{{i?.Child}}</td>
@@ -109,7 +109,7 @@
     </div> 
 
       <div class="mb-3 ">
-        <label for="Period"  class="form-label">Period</label>
+        <label for="Period"  class="form-label">Period (in days)</label>
         <input class="form-control" required   type="number" id="Period" formControlName="period" ngModel >
       </div>
       <div class="alert alert-warning" *ngIf="form.controls['period'].invalid && (form.dirty || form.touched)">

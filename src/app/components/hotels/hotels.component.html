@@ -15,18 +15,18 @@
   <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
     data-aos-duration="300">
     <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
-      <td>Id</td>
+      <!-- <td>Id</td> -->
       <td>Hotel Name</td>
       <td>City</td>
       <td>Evaluation</td>
-      <td>ImgURL</td>
-      <td>Period</td>
+      <td>Img URL</td>
+      <td>Period (in days)</td>
       <td>Single</td>
       <td>Double</td>
       <td>Description</td>
       <td>Price</td>
-      <td>lon</td>
-      <td>lat</td>
+      <td>lon(for map)</td>
+      <td>lat(for map)</td>
       <td>Edit</td>
       <td>Delete</td>
 
@@ -101,7 +101,7 @@
         </div>
       </div>
       <div class="mb-3 ">
-        <label class="form-label" for="Period">Period</label>
+        <label class="form-label" for="Period">Period (in days)</label>
         <input required class="form-control" type="number" min="1" id="Period" formControlName="period" ngModel>
 
         <div class="alert alert-warning" *ngIf="form.controls['period'].invalid && (form.dirty || form.touched)">
@@ -119,7 +119,7 @@
 
       </div>
       <div class="mb-3">
-        <label for="lat" class="form-label">lat</label>
+        <label for="lat" class="form-label">lat(for map)</label>
         <input required type="text" class="form-control" id="lat" formControlName="lat" ngModel>
 
         <div class="alert alert-warning" *ngIf="form.controls['lat'].invalid && (form.dirty || form.touched)">
@@ -129,7 +129,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="lon" class="form-label">lon</label>
+        <label for="lon" class="form-label">lon(for map)</label>
         <input required type="text" class="form-control" id="lon" formControlName="lon" ngModel>
         <div class="alert alert-warning" *ngIf="form.controls['lon'].invalid && (form.dirty || form.touched)">
           <small> name is required </small>
