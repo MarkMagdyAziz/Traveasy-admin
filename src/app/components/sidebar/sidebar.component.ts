@@ -25,8 +25,8 @@ export class SidebarComponent implements OnInit {
   // auth
   private roles: string[] = [];
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
+  // showAdminBoard = false;
+  // showModeratorBoard = false;
   username?: string;
 
   sliderData = [
@@ -62,18 +62,14 @@ export class SidebarComponent implements OnInit {
     },
     {
       routerLink: 'bookedHoliday',
-     icon: 'fa-solid fa-file-invoice',
+      icon: 'fa-solid fa-file-invoice',
       label: 'Booked Holidays',
     },
-    {
-      routerLink: 'tourguid',
-      icon: 'fa-solid fa-earth-americas',
-      label: 'Tour Guide',
-    },
+
     {
       routerLink: "city",
-      icon:"fa-solid fa-earth-americas",
-      label:"City"
+      icon: "fa-solid fa-earth-americas",
+      label: "City"
     },
   ];
 
@@ -101,19 +97,21 @@ export class SidebarComponent implements OnInit {
     private storageService: StorageService,
     private authService: AuthAPIServiceService
   ) {
-    this.isLoggedIn = this.storageService.getUser().user ? true : false;
+
   }
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
     // auth
+    console.log(this.storageService.isLoggedIn())
+
     this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
       this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
     }
