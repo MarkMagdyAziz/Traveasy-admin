@@ -22,11 +22,10 @@ export class SidebarComponent implements OnInit {
   collapsed: boolean = false;
   screenWidth = 0;
 
-  // auth
   private roles: string[] = [];
   isLoggedIn = false;
-  // showAdminBoard = false;
-  // showModeratorBoard = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
   username?: string;
 
   sliderData = [
@@ -110,8 +109,8 @@ export class SidebarComponent implements OnInit {
       const user = this.storageService.getUser();
       this.roles = user.roles;
 
-      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
     }
