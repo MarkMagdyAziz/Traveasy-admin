@@ -148,4 +148,20 @@ export class FlightsComponent implements OnInit {
 
   }
 
+
+  // Fun Delete 
+  handleDelete(id: any) {
+    const observer = {
+      next: () => {
+        this.notifyService.showDanger("removed succesfully !!", "Notification")
+        this.flightService.getFlight().subscribe((data: any) => {
+          this.FlightsList = data;
+        });
+      },
+      error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
+    };
+    this.flightService.deleteFlight(id).subscribe(observer);
+  }
+
+
 }

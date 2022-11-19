@@ -25,7 +25,7 @@
             <td>CabinClass</td>
             <td>Price</td>
             <td>NumberTickets</td>
-            <td>Edit</td>
+          
             <td>Delete</td>
         </thead>
         <tbody>
@@ -43,8 +43,8 @@
                 <td>{{Item.Price}}</td>
                 <td>{{Item.NumberTickets}}</td>
                 
-                <td><button class="orangeBtn"  >Edit</button></td>
-                <td><button class="redBtn" >Delete</button></td>
+              
+                <td><button class="redBtn"  (click)="handleDelete(Item._id)">Delete</button></td>
             </tr> 
 
         </tbody>
@@ -73,7 +73,7 @@
           </datalist>
 
           <div class="alert alert-warning" *ngIf="form.controls['FlyingFrom'].invalid && (form.dirty || form.touched)">
-            <small> FlyingFrom is required & FlyingFrom must be atleast 3 letters</small>
+            <small> FlyingFrom is required </small>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
             <label for="FlyingTo" class="form-label">FlyingTo</label>
             <input required type="text" name="country" class="form-control" id="FlyingTo" formControlName="FlyingTo" ngModel>
             <div class="alert alert-warning" *ngIf="form.controls['FlyingTo'].invalid && (form.dirty || form.touched)">
-              <small> FlyingTo is required & FlyingTo must be atleast 3 letters</small>
+              <small> FlyingTo is required </small>
             </div>
           </div>
 
@@ -89,7 +89,7 @@
             <label for="DepartureDate" class="form-label">DepartureDate</label>
             <input required type="date" class="form-control" id="DepartureDate" formControlName="DepartureDate" ngModel>
             <div class="alert alert-warning" *ngIf="form.controls['DepartureDate'].invalid && (form.dirty || form.touched)">
-              <small> DepartureDate is required & DepartureDate must be atleast 3 letters</small>
+              <small> DepartureDate is required </small>
             </div>
           </div>
 
@@ -97,7 +97,7 @@
             <label for="ReturnDate" class="form-label">ReturnDate</label>
             <input required type="date" class="form-control" id="ReturnDate" formControlName="ReturnDate" ngModel>
             <div class="alert alert-warning" *ngIf="form.controls['ReturnDate'].invalid && (form.dirty || form.touched)">
-              <small> ReturnDate is required & ReturnDate must be atleast 3 letters</small>
+              <small> ReturnDate is required</small>
             </div>
           </div>
 
@@ -126,7 +126,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="CabinClass" class="form-label">CabinClass</label>
+            <label for="CabinClass" class="form-label">Cabin Class</label>
             <input required type="text" name="daCabinClass" class="form-control" id="CabinClass" formControlName="CabinClass" ngModel>
             <datalist id="daCabinClass">
                 <option value="first"></option>
@@ -151,7 +151,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="NumberTickets" class="form-label">NumberTickets</label>
+            <label for="NumberTickets" class="form-label">Number Tickets</label>
             <input required type="number" class="form-control" id="NumberTickets" formControlName="NumberTickets" ngModel>
             <div class="alert alert-warning" *ngIf="form.controls['NumberTickets'].invalid && (form.dirty || form.touched)">
               <small> NumberTickets is required </small>
