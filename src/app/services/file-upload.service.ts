@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -7,10 +7,14 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class FileUploadService {
-  constructor(private http: HttpClient) {}
+  isFile: Boolean = false
+  constructor(private http: HttpClient) { }
+  // httpRequestHeaders = new HttpHeaders({
+  //   'Content-Type': 'multipart/form-data'
+  // });
   upload(file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-
+    this.isFile = true
     formData.append('file', file);
 
     const req = new HttpRequest(
@@ -20,6 +24,7 @@ export class FileUploadService {
       {
         reportProgress: true,
         responseType: 'json',
+        // headers: this.httpRequestHeaders,
       }
     );
     return this.http.request(req);
