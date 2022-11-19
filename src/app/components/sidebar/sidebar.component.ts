@@ -65,7 +65,7 @@ export class SidebarComponent implements OnInit {
       label: 'Booked Holidays',
     },
 
-    {
+      {
       routerLink: "city",
       icon: "fa-solid fa-earth-americas",
       label: "City"
