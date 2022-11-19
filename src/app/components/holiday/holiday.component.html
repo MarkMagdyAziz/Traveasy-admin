@@ -18,7 +18,7 @@
       <!-- <td>Id</td> -->
       <td>City</td>
       <td>Evaluation</td>
-      <td>Img URL</td>
+      <!-- <td>Img URL</td> -->
       <td>Period (in days)</td>
       <td>Description</td>
       <td>Price</td>
@@ -34,7 +34,7 @@
         <!-- <td>{{i?._id}}</td> -->
         <td>{{i?.City?.City_Name}}</td>
         <td>{{i?.Evaluation}}</td>
-        <td>{{i?.ImgURL}}</td>
+        <!-- <td>{{i?.ImgURL}}</td> -->
         <td>{{i?.Period}}</td>
         <td>{{i?.Description}}</td>
         <td>{{i?.Price}}</td>
@@ -83,12 +83,15 @@
       </div>
       <div class="mb-3">
         <label for="ImgURL" class="form-label">Img URL</label> <br>
-        <!-- <input type="text" class="form-control" id="ImgURL" formControlName="img" ngModel> -->
-      <app-image-upload></app-image-upload>
-        <div class="alert alert-warning"
+        <input type="text" class="form-control" formControlName="img" id="ImgURL"  ngModel>
+
+      <!-- <app-image-upload   [name]="name"></app-image-upload> -->
+        
+      
+      <div class="alert alert-warning"
           *ngIf="holidayForm.controls['img'].invalid && (holidayForm.dirty || holidayForm.touched)">
           <small> This is required</small>
-        </div>
+     </div>
       </div>
       <div class="mb-3 ">
         <label for="Period">Period (in days)</label> <br>

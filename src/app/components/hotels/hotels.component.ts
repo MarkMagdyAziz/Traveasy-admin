@@ -52,7 +52,7 @@ export class HotelsComponent implements OnInit {
         ],
       ),
       img: new FormControl(
-        '', [Validators.required]
+        '',
       ),
 
       evaluation:

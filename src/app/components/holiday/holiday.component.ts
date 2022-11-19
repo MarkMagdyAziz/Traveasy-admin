@@ -23,7 +23,6 @@ export class HolidayComponent implements OnInit {
   currentHolidayID: string = '';
   cities: Icity[] = [];
 
-
   // @ViewChild('holidayForm') form!: NgForm
   holidayForm: FormGroup;
 
@@ -54,7 +53,7 @@ export class HolidayComponent implements OnInit {
         ],
       ),
       img: new FormControl(
-        '', [Validators.required]
+        '',
       ),
 
       evaluation:
@@ -120,12 +119,14 @@ export class HolidayComponent implements OnInit {
   }
 
   handleSubmit(holiday: any) {
+
     const observer = {
       next: () => {
         this.notifyService.showSuccess("holiday updated successfully !!", "Notification")
         this.holidayForm.reset();
         this.holidayService.getHolodays().subscribe((data: any) => {
           this.holidaysList = data;
+
         });
       },
       error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
@@ -137,8 +138,10 @@ export class HolidayComponent implements OnInit {
 
         this.holidayService.updateHoliday(this.currentHolidayID, holiday)
           .subscribe(observer)
+
       } else {
         this.holidayService.postHoliday(holiday).subscribe(observer)
+        
       }
     } else {
       this.notifyService.showDanger("Not Valid Data !!", "Notification")

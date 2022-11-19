@@ -1,5 +1,5 @@
 import { FileUploadService } from './../../services/file-upload.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 @Component({
@@ -15,6 +15,7 @@ export class ImageUploadComponent implements OnInit {
   previews: string[] = [];
   imageInfos?: Observable<any>;
 
+  @Input() name:any = ''
   constructor(private uploadService: FileUploadService) {
     this.imageInfos = this.uploadService.getFiles();
   }
@@ -57,6 +58,7 @@ export class ImageUploadComponent implements OnInit {
     if (file) {
       this.uploadService.upload(file).subscribe({
         next: (event: any) => {
+          console.log(event)
           if (event.type === HttpEventType.UploadProgress) {
             this.progressInfos[idx].value = Math.round(
               (100 * event.loaded) / event.total
@@ -65,6 +67,7 @@ export class ImageUploadComponent implements OnInit {
             const msg = 'Uploaded the file successfully: ' + file.name;
             this.message.push(msg);
             this.imageInfos = this.uploadService.getFiles();
+            this.name=file.name;
           }
         },
         error: (err: any) => {

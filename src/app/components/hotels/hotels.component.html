@@ -19,10 +19,10 @@
       <td>Hotel Name</td>
       <td>City</td>
       <td>Evaluation</td>
-      <td>Img URL</td>
+      <!-- <td>Img URL</td> -->
       <td>Period (in days)</td>
-      <td>Single</td>
-      <td>Double</td>
+      <!-- <td>Single</td>
+      <td>Double</td> -->
       <td>Description</td>
       <td>Price</td>
       <td>lon(for map)</td>
@@ -39,7 +39,7 @@
         <td>{{i?.HotelName}}</td>
         <td>{{i?.City?.City_Name}}</td>
         <td>{{i?.Evaluation}}</td>
-        <td>{{i?.ImgURL}}</td>
+        <!-- <td>{{i?.ImgURL}}</td> -->
         <td>{{i?.Period}}</td>
         <td>{{i?.Description}}</td>
         <td>{{i?.Price}}</td>
@@ -67,7 +67,7 @@
         <input required type="text" class="form-control" id="HotelName" formControlName="hotelName" ngModel>
         <div class="alert alert-warning" *ngIf="form.controls['hotelName'].invalid && (form.dirty || form.touched)">
           <small> name is required & name must be atleast 3 letters</small>
-        </div>
+        </div> 
       </div>
       <div class="mb-3 ">
         <p>City</p>
@@ -91,15 +91,17 @@
         <div class="alert alert-warning" *ngIf="form.controls['evaluation'].invalid && (form.dirty || form.touched)">
           <small> This is required , enter number between 0:5 </small>
         </div>
-      </div>
+
+
+      </div> 
       <div class="mb-3">
         <label for="ImgURL" class="form-label">ImgURL</label>
-        <!-- <input required type="text" class="form-control" id="ImgURL" formControlName="img" ngModel> -->
-        <app-image-upload></app-image-upload>
+        <input required type="text" class="form-control" id="ImgURL" formControlName="img" ngModel>
+        <!-- <app-image-upload ></app-image-upload> -->
 
-        <div class="alert alert-warning" *ngIf="form.controls['img'].invalid && (form.dirty || form.touched)">
+        <!-- <div class="alert alert-warning" *ngIf="form.controls['img'].invalid && (form.dirty || form.touched)">
           <small> This is required</small>
-        </div>
+        </div> -->
       </div>
       <div class="mb-3 ">
         <label class="form-label" for="Period">Period (in days)</label>
