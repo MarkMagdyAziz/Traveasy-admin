@@ -51,9 +51,9 @@ export class HotelsComponent implements OnInit {
           Validators.maxLength(25),
         ],
       ),
-      img: new FormControl(
-        '',
-      ),
+      // img: new FormControl(
+      //   '',
+      // ),
 
       evaluation:
         new FormControl(['', [
@@ -161,7 +161,7 @@ export class HotelsComponent implements OnInit {
       hotelName: currentHotel?.HotelName,
       city: currentHotel?.City,
       evaluation: currentHotel?.Evaluation,
-      img: currentHotel?.ImgURL,
+      // img: currentHotel?.ImgURL,
       period: currentHotel?.Period,
       description: currentHotel?.Description,
       lat: currentHotel?.lat,

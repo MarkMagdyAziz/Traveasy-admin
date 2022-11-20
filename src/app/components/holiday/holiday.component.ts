@@ -52,9 +52,9 @@ export class HolidayComponent implements OnInit {
           Validators.minLength(3),
         ],
       ),
-      img: new FormControl(
-        '',
-      ),
+      // img: new FormControl(
+      //   '',
+      // ),
 
       evaluation:
         new FormControl(['', [
@@ -159,7 +159,7 @@ export class HolidayComponent implements OnInit {
     this.holidayForm.patchValue({
       city: currentHoliday?.City,
       evaluation: currentHoliday?.Evaluation,
-      img: currentHoliday?.ImgURL,
+      // img: currentHoliday?.ImgURL,
       period: currentHoliday?.Period,
       description: currentHoliday?.Description,
       price: currentHoliday?.Price,
