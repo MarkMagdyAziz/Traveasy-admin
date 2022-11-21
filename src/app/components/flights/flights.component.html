@@ -10,6 +10,26 @@
     </article>
   </div>
   <br> <br><br>
+  <div class="row" >
+    <div class="col">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" (click)="handleClick('Previous')" >Previous</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(1)">1</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(2)">2</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(3)">3</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(4)">4</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(5)">5</a></li>
+      <li class="page-item"><a class="page-link" (click)="handleClick('Next')">Next</a></li>
+    </ul>
+  </nav>
+  </div>  
+  <div class="col">
+  <label  class="form-label">Page Number  : {{page}}</label>
+</div>
+
+</div>
+
   <!-- Large modal -->
   <button type="button" class="orangeBtn" data-toggle="modal" (click)="open(content)">New</button>
   <br><br>
@@ -63,16 +83,18 @@
 
       <div class="mb-3">
         <label for="FlyingFrom" class="form-label">FlyingFrom</label>
-        <input required type="text" name="country" class="form-control" id="FlyingFrom" formControlName="FlyingFrom"
-          ngModel>
+        <!-- <input required type="text" name="country" class="form-control" id="FlyingFrom" formControlName="FlyingFrom"
+          ngModel> -->
 
-        <datalist id="country">
-          <option value="Egypt"></option>
-          <option value="Roma"></option>
-          <option value="UAE"></option>
-          <option value="USA"></option>
-          <option value="Paris"></option>
-        </datalist>
+          <select name="country" id="FlyingFrom" class="form-control" formControlName="FlyingFrom" ngModel>
+            <option value="Egypt">Egypt</option>
+            <option value="Roma">Roma</option>
+            <option value="UAE">UAE</option>
+            <option value="USA">USA</option>
+            <option value="Paris">Paris</option>
+        </select>
+
+        
 
         <div class="alert alert-warning" *ngIf="form.controls['FlyingFrom'].invalid && (form.dirty || form.touched)">
           <small> FlyingFrom is required </small>
@@ -81,8 +103,15 @@
 
       <div class="mb-3">
         <label for="FlyingTo" class="form-label">FlyingTo</label>
-        <input required type="text" name="country" class="form-control" id="FlyingTo" formControlName="FlyingTo"
-          ngModel>
+        <!-- <input required type="text" name="country" class="form-control" id="FlyingTo" formControlName="FlyingTo"
+          ngModel> -->
+          <select name="country" id="FlyingTo" class="form-control" formControlName="FlyingTo" ngModel>
+            <option value="Egypt">Egypt</option>
+            <option value="Roma">Roma</option>
+            <option value="UAE">UAE</option>
+            <option value="USA">USA</option>
+            <option value="Paris">Paris</option>
+        </select>
         <div class="alert alert-warning" *ngIf="form.controls['FlyingTo'].invalid && (form.dirty || form.touched)">
           <small> FlyingTo is required </small>
         </div>
@@ -131,13 +160,16 @@
 
       <div class="mb-3">
         <label for="CabinClass" class="form-label">Cabin Class</label>
-        <input required type="text" name="daCabinClass" class="form-control" id="CabinClass"
-          formControlName="CabinClass" ngModel>
-        <datalist id="daCabinClass">
-          <option value="first"></option>
-          <option value="business"></option>
-          <option value="economy"></option>
-        </datalist>
+        <!-- <input required type="text" name="daCabinClass" class="form-control" id="CabinClass"
+          formControlName="CabinClass" ngModel> -->
+
+          <select name="country" id="CabinClass" class="form-control" formControlName="CabinClass" ngModel>
+            <option value="first">first</option>
+          <option value="business">business</option>
+          <option value="economy">economy</option>
+        </select>
+
+
 
         <div class="alert alert-warning" *ngIf="form.controls['CabinClass'].invalid && (form.dirty || form.touched)">
           <small> CabinClass is required </small>
