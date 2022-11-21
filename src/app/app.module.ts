@@ -25,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AirlineComponent } from './components/airline/airline.component';
 import { FlightBookingComponent } from './components/flight-booking/flight-booking.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { ForbidenComponent } from './components/forbiden/forbiden.component';
 
 
 
@@ -47,6 +48,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     AirlineComponent,
     FlightBookingComponent,
     ImageUploadComponent,
+    ForbidenComponent,
   ],
   imports: [
     BrowserModule,

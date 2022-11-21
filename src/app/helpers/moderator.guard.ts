@@ -15,13 +15,12 @@ export class ModeratorGuard implements CanActivate {
   ): boolean {
     let isLoggedIn = this.storageService.isLoggedIn()
     let user: any = window.sessionStorage.getItem(USER_KEY);
-    let userRoles = JSON.parse(user).roles
+    let userRoles = JSON.parse(user)?.roles
 
-    if (userRoles.includes('ROLE_MODERATOR') || userRoles.includes('ROLE_ADMIN')) {
+    if (userRoles?.includes('ROLE_MODERATOR') || userRoles?.includes('ROLE_ADMIN')) {
       return true;
     } else {
-      this.router.navigate(['/'])
-
+      this.router.navigate(['/forbiden'], { skipLocationChange: true });
       return false;
     }
   }

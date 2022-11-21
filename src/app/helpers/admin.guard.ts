@@ -21,14 +21,13 @@ export class AdminGuard implements CanActivate {
   ): boolean {
     let isLoggedIn = this.storageService.isLoggedIn()
     let user: any = window.sessionStorage.getItem(USER_KEY);
-    let userRoles = JSON.parse(user).roles
+    let userRoles = JSON.parse(user)?.roles
 
-    if (userRoles.includes('ROLE_ADMIN')) {
+    if (userRoles?.includes('ROLE_ADMIN')) {
 
       return true;
     } else {
-      console.log("userRoles", userRoles)
-      this.router.navigate(['/login']);
+      this.router.navigate(['/forbiden'], { skipLocationChange: true });
       return false;
     }
   }

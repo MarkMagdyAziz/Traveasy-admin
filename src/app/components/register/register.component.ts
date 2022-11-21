@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     private authService: AuthAPIServiceService,
     private storageService: StorageService,
     private router: Router
-  ) {}
+  ) { }
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     username: new FormControl('', [
@@ -50,8 +50,9 @@ export class RegisterComponent implements OnInit {
       Validators.minLength(6),
       Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
     ]),
+    roles: new FormControl(['moderator'],),
   });
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   onSubmit() {
     const observer = {
       next: (response: any) => {
@@ -66,6 +67,7 @@ export class RegisterComponent implements OnInit {
       complete: () => this.router.navigate(['/login']),
     };
     if (this.registerForm.valid) {
+      console.log(this.registerForm.value)
       this.authService.register(this.registerForm.value).subscribe(observer);
     }
   }
