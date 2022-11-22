@@ -15,7 +15,7 @@ export class ImageUploadComponent implements OnInit {
   previews: string[] = [];
   imageInfos?: Observable<any>;
 
-  @Input() name:any = ''
+  @Input() name: any = ''
   constructor(private uploadService: FileUploadService) {
     this.imageInfos = this.uploadService.getFiles();
   }
@@ -67,16 +67,14 @@ export class ImageUploadComponent implements OnInit {
             const msg = 'Uploaded the file successfully: ' + file.name;
             this.message.push(msg);
             this.imageInfos = this.uploadService.getFiles();
-            this.name=file.name;
+            this.name = file.name;
           }
         },
         error: (err: any) => {
           this.progressInfos[idx].value = 0;
           const msg = 'Could not upload the file: ' + file.name;
           this.message.push(msg);
-          this.uploadService.isFile = false
         },
-        complete: () => this.uploadService.isFile = false
       });
     }
   }

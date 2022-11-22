@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ForbidenComponent } from './components/forbiden/forbiden.component';
 import { ModeratorGuard } from './helpers/moderator.guard';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
@@ -18,7 +19,6 @@ import { AdminGuard } from './helpers/admin.guard';
 
 const routes: Routes = [
   { path: '', component: LogginComponent },
-  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LogginComponent },
 
   // admin
@@ -36,6 +36,8 @@ const routes: Routes = [
     component: FlightsComponent,
     canActivate: [AdminGuard],
   },
+  { path: 'register', component: RegisterComponent, canActivate: [AdminGuard] },
+
   // moderator || admin
   {
     path: 'holiday',
@@ -71,6 +73,7 @@ const routes: Routes = [
     path: 'forbiden',
     component: ForbidenComponent,
   },
+  { path: '**', pathMatch: 'full', component: NotFoundComponent }
 ];
 
 @NgModule({
