@@ -1,3 +1,4 @@
+import { ForbidenComponent } from './components/forbiden/forbiden.component';
 import { ModeratorGuard } from './helpers/moderator.guard';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgModule } from '@angular/core';
@@ -16,8 +17,10 @@ import { UsersComponent } from './components/users/users.component';
 import { AdminGuard } from './helpers/admin.guard';
 
 const routes: Routes = [
+  { path: '', component: LogginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LogginComponent },
+
   // admin
   {
     path: 'dashboard',
@@ -63,6 +66,10 @@ const routes: Routes = [
     path: 'upload',
     component: ImageUploadComponent,
     canActivate: [ModeratorGuard],
+  },
+  {
+    path: 'forbiden',
+    component: ForbidenComponent,
   },
 ];
 
