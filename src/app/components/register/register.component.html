@@ -5,10 +5,9 @@
       <div class="col-lg-6 px-lg-4">
         <div class="card">
           <div class="card-header px-lg-5">
-            <div class="card-heading text-primary">Register form</div>
+            <div class="card-heading text-primary">Add Moderator</div>
           </div>
           <div class="card-body p-lg-5">
-            <h3 class="mb-4">Get started</h3>
 
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" #f="ngForm">
               <div class="form-floating mb-3">
@@ -73,11 +72,11 @@
                 Invalid password use strong one
               </div>
               <div class="form-group">
-                <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid">Register</button>
+                <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid">Submit</button>
               </div>
             </form>
             <div class="alert alert-success" *ngIf="isSuccessful">
-              Your registration is successful!
+              Moderator is added successfully!
             </div>
 
             <div class="text-center text-success">
@@ -90,8 +89,7 @@
           src="https://img.freepik.com/free-vector/vacation-holidays-background-with-realistic-globe-suitcase-photo-camera_1284-10476.jpg?1?w=360"
           alt="" style="transform: rotate(10deg)">
         <h1 class="mb-4">Traveasy.com <br class="d-none d-lg-inline">Vacation become easier.</h1>
-        <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-          incididunt ut labore.</p>
+
       </div>
     </div>
   </div>

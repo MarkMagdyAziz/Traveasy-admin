@@ -26,9 +26,9 @@ export class FlightServiceService {
   }
 
   // Function For Get All Flight
-  getFlight(): Observable<any> {
+  getFlight(page : number): Observable<any> {
     return this.HttpClient.get<IFlight[]>(
-      `${environment.BasicURL}flight`
+      `${environment.BasicURL}flight?page=${page}`
     ).pipe(retry(2), catchError(this.handleError));
   }
 

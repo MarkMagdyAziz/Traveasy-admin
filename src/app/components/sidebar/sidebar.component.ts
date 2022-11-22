@@ -22,56 +22,13 @@ export class SidebarComponent implements OnInit {
   collapsed: boolean = false;
   screenWidth = 0;
 
-  // auth
   private roles: string[] = [];
   isLoggedIn = false;
-  // showAdminBoard = false;
-  // showModeratorBoard = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
   username?: string;
 
-  sliderData = [
-    {
-      routerLink: 'dashboard',
-      icon: 'fa-solid fa-chart-line',
-      label: 'Dashboard',
-    },
-    {
-      routerLink: 'users',
-      icon: 'fa-solid fa-user-group',
-      label: 'Users',
-    },
-    {
-      routerLink: 'hotel',
-      icon: 'fa-solid fa-hotel',
-      label: 'Hotels',
-    },
-    {
-      routerLink: 'bookedHotel',
-      icon: 'fa-solid fa-check',
-      label: 'Booked Hotels',
-    },
-    {
-      routerLink: 'flight',
-      icon: 'fa-solid fa-plane',
-      label: 'Flights',
-    },
-    {
-      routerLink: 'holiday',
-      icon: 'fa-solid fa-passport',
-      label: 'Holiday',
-    },
-    {
-      routerLink: 'bookedHoliday',
-      icon: 'fa-solid fa-file-invoice',
-      label: 'Booked Holidays',
-    },
 
-      {
-      routerLink: "city",
-      icon: "fa-solid fa-earth-americas",
-      label: "City"
-    },
-  ];
 
   @Output() onToggleSlideBar: EventEmitter<SlideBarToggle> = new EventEmitter();
   toggleCollapse(): void {
@@ -103,15 +60,14 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
     // auth
-    console.log(this.storageService.isLoggedIn())
 
     this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
       this.roles = user.roles;
 
-      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
     }

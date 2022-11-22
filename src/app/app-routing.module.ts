@@ -1,3 +1,6 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ForbidenComponent } from './components/forbiden/forbiden.component';
+import { ModeratorGuard } from './helpers/moderator.guard';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,53 +15,69 @@ import { LogginComponent } from './components/loggin/loggin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TourguidComponent } from './components/tourguid/tourguid.component';
 import { UsersComponent } from './components/users/users.component';
-import { AuthGuardGuard } from './helpers/auth-guard.guard';
+import { AdminGuard } from './helpers/admin.guard';
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: LogginComponent },
   { path: 'login', component: LogginComponent },
+
+  // admin
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [AdminGuard],
   },
-  { path: 'hotel', component: HotelsComponent, canActivate: [AuthGuardGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuardGuard] },
+  { path: 'hotel', component: HotelsComponent, canActivate: [ModeratorGuard] },
+  // admin
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
+  // admin
   {
     path: 'flight',
     component: FlightsComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [AdminGuard],
   },
+  { path: 'register', component: RegisterComponent, canActivate: [AdminGuard] },
+
+  // moderator || admin
   {
     path: 'holiday',
     component: HolidayComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [ModeratorGuard],
   },
+  // admin || moderator
   {
     path: 'tourguid',
     component: TourguidComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [ModeratorGuard],
   },
+  // admin || moderator
   {
     path: 'bookedHotel',
     component: BookedHotelsComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [ModeratorGuard],
   },
+  // admin || moderator
   {
     path: 'bookedHoliday',
     component: BookedHolidaysComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [ModeratorGuard],
   },
-  { path: 'city', component: CityComponent, canActivate: [AuthGuardGuard] },
+  // admin
+  { path: 'city', component: CityComponent, canActivate: [AdminGuard] },
   {
     path: 'upload',
     component: ImageUploadComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [ModeratorGuard],
   },
+  {
+    path: 'forbiden',
+    component: ForbidenComponent,
+  },
+  { path: '**', pathMatch: 'full', component: NotFoundComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
