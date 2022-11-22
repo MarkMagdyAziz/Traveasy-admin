@@ -70,11 +70,11 @@ export class BookedHolidaysComponent implements OnInit {
           Validators.required,
         ],
       ),
-      period:new FormControl('', [
-        Validators.required,
-        Validators.min(1),
-      ]
-      ),
+      // period:new FormControl('', [
+      //   Validators.required,
+      //   Validators.min(1),
+      // ]
+      // ),
      
       holidays:new FormControl('', [
         Validators.required,
@@ -180,7 +180,10 @@ handleDelete(id: any) {
     },
     error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
   };
+  if(confirm("Are you sure to delete ")) {
+
   this.holidayService.deleteBookedHolodays(id).subscribe(observer);
+  }
 }
 
 
