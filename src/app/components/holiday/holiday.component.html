@@ -81,18 +81,15 @@
           <small> This is required , enter number between 0:5 </small>
         </div>
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="ImgURL" class="form-label">Img URL</label> <br>
-        <input type="text" class="form-control" formControlName="img" id="ImgURL"  ngModel>
-
-      <!-- <app-image-upload   [name]="name"></app-image-upload> -->
-        
-      
+        <input type="text" class="form-control" formControlName="img" id="ImgURL"  ngModel>        
       <div class="alert alert-warning"
           *ngIf="holidayForm.controls['img'].invalid && (holidayForm.dirty || holidayForm.touched)">
           <small> This is required</small>
      </div>
-      </div>
+      </div> -->
+      <app-image-upload></app-image-upload>
       <div class="mb-3 ">
         <label for="Period">Period (in days)</label> <br>
         <input class="form-control" type="number" min="1" id="Period" formControlName="period" ngModel>
