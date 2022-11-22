@@ -25,6 +25,7 @@ export class FlightsComponent implements OnInit {
   statistics: Statistics = {} as Statistics;
   subscription: any;
   form: FormGroup;
+  page : number = 1
 
   constructor(private flightService :FlightServiceService ,
               private AirlineService : AirlineServiceService,
@@ -115,7 +116,7 @@ export class FlightsComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.flightService.getFlight().subscribe((data: any)=>{
+    this.flightService.getFlight(this.page).subscribe((data: any)=>{
       this.FlightsList = data ;
     });
     
@@ -138,18 +139,15 @@ export class FlightsComponent implements OnInit {
       next: () => {
         this.notifyService.showSuccess("Add successfully !!", "Notification")
         this.form.reset();
-        this.flightService.getFlight().subscribe((data: any) => {
+        this.flightService.getFlight(this.page).subscribe((data: any) => {
           this.FlightsList = data;
         });
       },
       error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
     };
 
-    if (this.form.valid) {
-
-      
-        this.flightService.postFlight(Flights).subscribe(observer)
-     
+    if (this.form.valid) {      
+        this.flightService.postFlight(Flights).subscribe(observer)     
     } else {
       this.notifyService.showDanger("Not Valid Data !!", "Notification")
 
@@ -157,13 +155,26 @@ export class FlightsComponent implements OnInit {
 
   }
 
+  handleClick(ev : string){
+    this.page = ev == "Next" ? this.page + 1 :  this.page > 1 ? this.page - 1 : 1
+    this.flightService.getFlight(this.page).subscribe((data: any)=>{
+      this.FlightsList = data ;
+    });    
+  }
+
+  FunPageNumber(page : number){
+    this.page = page
+    this.flightService.getFlight(this.page).subscribe((data: any)=>{
+      this.FlightsList = data ;
+    });    
+  }
 
   // Fun Delete 
   handleDelete(id: any) {
     const observer = {
       next: () => {
         this.notifyService.showDanger("removed succesfully !!", "Notification")
-        this.flightService.getFlight().subscribe((data: any) => {
+        this.flightService.getFlight(this.page).subscribe((data: any) => {
           this.FlightsList = data;
         });
       },
