@@ -37,6 +37,12 @@
             <span class="slideBar-link-text" *ngIf="collapsed">Flights</span>
           </a>
         </li>
+        <li class="slideBar-nav-item">
+          <a class="slideBar-nab-link" routerLink="register">
+            <i class="slideBar-link-icon fa-solid fa-arrow-right-to-bracket"></i>
+            <span class="slideBar-link-text" *ngIf="collapsed">Add Moderator</span>
+          </a>
+        </li>
       </ng-container>
       <li class="slideBar-nav-item">
         <a class="slideBar-nab-link" routerLink="hotel">
@@ -80,12 +86,6 @@
       </li>
     </ng-container>
     <ng-container class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="slideBar-nav-item">
-        <a class="slideBar-nab-link" routerLink="register">
-          <i class="slideBar-link-icon fa-solid fa-arrow-right-to-bracket"></i>
-          <span class="slideBar-link-text" *ngIf="collapsed">Sign Up</span>
-        </a>
-      </li>
       <li class="slideBar-nav-item">
         <a class="slideBar-nab-link" routerLink="login">
           <i class="slideBar-link-icon fa-solid fa-arrows-down-to-line"></i>
