@@ -41,7 +41,7 @@
                 <td>{{i?.IsApprove}}</td>
                 <td>{{i?.startDate| date:'MM/dd/yyyy '}}</td>
                 <td>{{i?.endDate| date:'MM/dd/yyyy '}}</td>
-                <td>{{i?.Holidays?._id }}</td>
+                <td>{{i?.Holidays?.Description}}</td>
                 <td>{{i?.Tourist?.username}}</td>
 
                 <td><button class="orangeBtn" (click)="open(content)"  (click)="handleEditBtn(i?._id)">Edit</button></td>
