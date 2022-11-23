@@ -34,12 +34,12 @@ export class BookedHotelsComponent implements OnInit {
 
 
     this.form = this.fb.group({
-      roomCount: new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.min(1),
-        ]),
+      // roomCount: new FormControl(
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.min(1),
+      //   ]),
       adultCount: new FormControl(
         '',
         [
@@ -52,12 +52,12 @@ export class BookedHotelsComponent implements OnInit {
           Validators.required,
           Validators.min(0),
         ]),
-      period: new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-        ]),
+      // period: new FormControl(
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.min(0),
+      //   ]),
       single: new FormControl(
         '',
         [
@@ -170,14 +170,13 @@ export class BookedHotelsComponent implements OnInit {
 }
 
   handleEditBtn(id: any) {
-
     this.currentHotelId = id;
     let currentHotel = this.bookedList.find((hotel: any) => { return hotel._id === id })
     this.form.patchValue({
-      roomCount: currentHotel?.RoomCount,
+      // roomCount: currentHotel?.RoomCount,
       adultCount: currentHotel?.AdultCount,
       child: currentHotel?.Child,
-      period: currentHotel?.Period,
+      // period: currentHotel?.Period,
       single: currentHotel?.Single,
       double: currentHotel?.Double,
       isApprove: currentHotel?.IsApprove,
@@ -205,7 +204,9 @@ export class BookedHotelsComponent implements OnInit {
       },
       error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
     };
+    if(confirm("Are you sure to delete ")) {
     this.hotelService.deleteBookedHotels(id).subscribe(observer);
+    }
   }
 
 }

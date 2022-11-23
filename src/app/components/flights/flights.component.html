@@ -36,16 +36,16 @@
   <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
     data-aos-duration="300">
     <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
-      <td>FlyingFrom</td>
-      <td>FlyingTo</td>
-      <td>DepartureDate</td>
-      <td>ReturnDate</td>
+      <td>Flying From</td>
+      <td>Flying To</td>
+      <td>Departure Date</td>
+      <td>Return Date</td>
       <td>Trip Number</td>
       <td>Seat no</td>
       <td>Infant</td>
-      <td>CabinClass</td>
+      <td>Cabin Class</td>
       <td>Price</td>
-      <td>NumberTickets</td>
+      <td>Number Tickets</td>
 
       <td>Delete</td>
     </thead>
@@ -82,7 +82,7 @@
     <form [formGroup]="form" (ngSubmit)="FunSubmit(form.value)">
 
       <div class="mb-3">
-        <label for="FlyingFrom" class="form-label">FlyingFrom</label>
+        <label for="FlyingFrom" class="form-label">Flying From</label>
         <!-- <input required type="text" name="country" class="form-control" id="FlyingFrom" formControlName="FlyingFrom"
           ngModel> -->
 
@@ -102,7 +102,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="FlyingTo" class="form-label">FlyingTo</label>
+        <label for="FlyingTo" class="form-label">Flying To</label>
         <!-- <input required type="text" name="country" class="form-control" id="FlyingTo" formControlName="FlyingTo"
           ngModel> -->
           <select name="country" id="FlyingTo" class="form-control" formControlName="FlyingTo" ngModel>
@@ -191,7 +191,7 @@
         <label for="NumberTickets" class="form-label">Number Tickets</label>
         <input required type="number" class="form-control" id="NumberTickets" formControlName="NumberTickets" ngModel>
         <div class="alert alert-warning" *ngIf="form.controls['NumberTickets'].invalid && (form.dirty || form.touched)">
-          <small> NumberTickets is required </small>
+          <small> Number Tickets is required </small>
         </div>
       </div>
 

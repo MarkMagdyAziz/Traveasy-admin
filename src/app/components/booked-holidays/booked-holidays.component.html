@@ -19,7 +19,7 @@
             <td>Room Count</td>
             <td>Adult Count</td>
             <td>Child</td>
-            <td>Period (in days)</td>
+            <!-- <td>Period (in days)</td> -->
             <td>Is Approve</td>
             <td>start Date</td>
             <td>end Date</td>
@@ -37,11 +37,11 @@
                 <td>{{i?.RoomCount}}</td>
                 <td>{{i?.AdultCount}}</td>
                 <td>{{i?.Child}}</td>
-                <td>{{i?.Period}}</td>
+                <!-- <td>{{i?.Period}}</td> -->
                 <td>{{i?.IsApprove}}</td>
                 <td>{{i?.startDate| date:'MM/dd/yyyy '}}</td>
                 <td>{{i?.endDate| date:'MM/dd/yyyy '}}</td>
-                <td>{{i?.Holidays?._id }}</td>
+                <td>{{i?.Holidays?.Description}}</td>
                 <td>{{i?.Tourist?.username}}</td>
 
                 <td><button class="orangeBtn" (click)="open(content)"  (click)="handleEditBtn(i?._id)">Edit</button></td>
@@ -92,10 +92,10 @@
       <input class="form-control"   type="number" id="Child" formControlName="child" >
     </div>
 
-      <div class="mb-3 ">
+      <!-- <div class="mb-3 ">
         <label for="Period"  class="form-label">Period (in days)</label>
         <input class="form-control"   type="number" id="Period" formControlName="period" >
-      </div>
+      </div> -->
      
       
       <div class="mb-3">
@@ -106,7 +106,8 @@
         <label for="endDate" class="form-label">End Date</label>
         <input class="form-control"   type="date"  formControlName="endDate" id="endDate">
       </div>
-      <div class="mb-3">
+      
+      <!-- <div class="mb-3">
         <label for="Holidays" class="form-label">Holidays</label>
         <input class="form-control"   type="text" id="Holidays" formControlName="holidays" >
       </div>
@@ -115,7 +116,7 @@
       <div class="mb-3">
         <label for="tourist" class="form-label">tourist</label>
         <input class="form-control"   type="text" id="tourist" formControlName="tourist" >
-      </div>
+      </div> -->
   
       </fieldset>
 

@@ -20,13 +20,12 @@
       <td>City</td>
       <td>Evaluation</td>
       <!-- <td>Img URL</td> -->
-      <td>Period (in days)</td>
-      <!-- <td>Single</td>
-      <td>Double</td> -->
+      <!-- <td>Period (in days)</td> -->
       <td>Description</td>
       <td>Price</td>
       <td>lon(for map)</td>
       <td>lat(for map)</td>
+
       <td>Edit</td>
       <td>Delete</td>
 
@@ -40,7 +39,7 @@
         <td>{{i?.City?.City_Name}}</td>
         <td>{{i?.Evaluation}}</td>
         <!-- <td>{{i?.ImgURL}}</td> -->
-        <td>{{i?.Period}}</td>
+        <!-- <td>{{i?.Period}}</td> -->
         <td>{{i?.Description}}</td>
         <td>{{i?.Price}}</td>
         <td>{{i?.lon}}</td>
@@ -101,17 +100,20 @@
           <small> This is required</small>
         </div> -->
       <!-- </div> -->
+       <div class="mb-3 ">
       
       <app-image-upload></app-image-upload>
+      </div>
+      
 
-      <div class="mb-3 ">
+      <!-- <div class="mb-3 ">
         <label class="form-label" for="Period">Period (in days)</label>
         <input required class="form-control" type="number" min="1" id="Period" formControlName="period" ngModel>
 
         <div class="alert alert-warning" *ngIf="form.controls['period'].invalid && (form.dirty || form.touched)">
           <small> This is required , should be atleast 1 day </small>
         </div>
-      </div>
+      </div> -->
 
       <div class="mb-3">
         <label for="Description" class="form-label">Description</label>

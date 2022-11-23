@@ -61,11 +61,11 @@ export class HotelsComponent implements OnInit {
           Validators.min(0),
           Validators.max(5)]
         ]),
-      period: new FormControl('', [
-        Validators.required,
-        Validators.min(0),
-      ]
-      ),
+      // period: new FormControl('', [
+      //   Validators.required,
+      //   Validators.min(0),
+      // ]
+      // ),
       description: new FormControl(
         '',
         [
@@ -162,7 +162,7 @@ export class HotelsComponent implements OnInit {
       city: currentHotel?.City,
       evaluation: currentHotel?.Evaluation,
       // img: currentHotel?.ImgURL,
-      period: currentHotel?.Period,
+      // period: currentHotel?.Period,
       description: currentHotel?.Description,
       lat: currentHotel?.lat,
       lon: currentHotel?.lon,
@@ -188,7 +188,8 @@ export class HotelsComponent implements OnInit {
       },
       error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
     };
+    if(confirm("Are you sure to delete ")) {
     this.hotelService.deleteHotel(id).subscribe(observer);
-  }
+  }}
 
 }

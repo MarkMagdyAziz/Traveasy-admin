@@ -180,7 +180,9 @@ export class FlightsComponent implements OnInit {
       },
       error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
     };
+    if(confirm("Are you sure to delete ")) {
     this.flightService.deleteFlight(id).subscribe(observer);
+    }
   }
 
 

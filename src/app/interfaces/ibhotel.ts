@@ -1,9 +1,9 @@
 export interface IBHotel {
     _id: String,
-    RoomCount  : Number,    
+    // RoomCount  : Number,    
     AdultCount : Number ,
     Child : Number,
-    Period : Number,
+    // Period : Number,
     Single : Number,
     Double : Number,
     IsApprove : Boolean ,

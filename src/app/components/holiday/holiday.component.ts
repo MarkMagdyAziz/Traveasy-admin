@@ -177,7 +177,9 @@ export class HolidayComponent implements OnInit {
       },
       error: (err: Error) => this.notifyService.showDanger(err.message, "Notification"),
     };
+    if(confirm("Are you sure to delete ")) {
     this.holidayService.deleteHoliday(id).subscribe(observer);
+    }
   }
 
 }
