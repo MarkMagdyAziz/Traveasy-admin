@@ -16,10 +16,10 @@
         data-aos-duration="300">
         <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
             <!-- <td>Id</td> -->
-            <td>Room Count</td>
+            <!-- <td>Room Count</td> -->
             <td>Adult Count</td>
             <td>Child</td>
-            <td>Period (in days)</td>
+            <!-- <td>Period (in days)</td> -->
             <td>Single</td>
             <td>Double</td>
             <td>Is Approve</td>
@@ -36,10 +36,10 @@
  
             <tr data-aos="fade-up" *ngFor="let i of bookedList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
                 <!-- <td>{{i?._id}}</td> -->
-                <td>{{i?.RoomCount}}</td>
+                <!-- <td>{{i?.RoomCount}}</td> -->
                 <td>{{i?.AdultCount}}</td>
                 <td>{{i?.Child}}</td>
-                <td>{{i?.Period}}</td>
+                <!-- <td>{{i?.Period}}</td> -->
                 <td>{{i?.Single}}</td>
                 <td>{{i?.Double}}</td>
                 <td>{{i?.IsApprove}}</td>
@@ -82,14 +82,14 @@
 
     <fieldset [disabled]="isDisabled">
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <label for="RoomCount" class="form-label">Room Count</label>
       <input class="form-control" required  type="number" id="RoomCount"  formControlName="roomCount"  ngModel >
     
     </div>
     <div class="alert alert-warning" *ngIf="form.controls['roomCount'].invalid && (form.dirty || form.touched)">
       <small> this field is required</small>
-    </div> 
+    </div>  -->
 
     <div class="mb-3">
       <label for="adultCount" class="form-label">adult Count</label>
@@ -108,13 +108,13 @@
       <small> this field is required</small>
     </div> 
 
-      <div class="mb-3 ">
+      <!-- <div class="mb-3 ">
         <label for="Period"  class="form-label">Period (in days)</label>
         <input class="form-control" required   type="number" id="Period" formControlName="period" ngModel >
       </div>
       <div class="alert alert-warning" *ngIf="form.controls['period'].invalid && (form.dirty || form.touched)">
         <small> this field is required</small>
-      </div> 
+      </div>  -->
 
       <div class="mb-3 ">
         <label for="single"  class="form-label">single</label>
