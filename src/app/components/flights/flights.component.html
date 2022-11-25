@@ -74,7 +74,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add Flight</h4>
+    <h4 class="modal-title" id="modal-basic-title">Add Ticket</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
 
@@ -154,7 +154,7 @@
         <label for="Infant" class="form-label">Infant</label>
         <input required type="text" class="form-control" id="Infant" formControlName="Infant" ngModel>
         <div class="alert alert-warning" *ngIf="form.controls['Infant'].invalid && (form.dirty || form.touched)">
-          <small> Infant is required & Infant must be atleast 3 letters</small>
+          <small> Infant is required </small>
         </div>
       </div>
 
